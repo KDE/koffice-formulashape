@@ -1,25 +1,42 @@
+# $Id$
 
-INCLUDES= $(all_includes)
+SUBDIRS = . pics
 
-SUBDIRS = pics
+INCLUDES = $(KOFFICE_INCLUDES) $(all_includes) $(MICO_INCLUDES) 
+LDFLAGS	= $(all_libraries) $(KDE_RPATH)
+LDADD = ../lib/kofficeui/libkofficeui.la 
 
-####### 
-# you can add here more. This one gets installed 
-lib_LTLIBRARIES = libkformula.la
-KFORMULAVERSION=	0.0.1
-KFORMULAPATCH=	0
+####### Files
 
-libkformula_la_SOURCES	= box.cc kformula.cc kformulaedit.cc matrixbox.cc \
-			MatrixDialog.cc kformulatoolbar.cc
+bin_PROGRAMS = kformula
 
-include_HEADERS = box.h kformula.h kformulaedit.h matrixbox.h MatrixDialog.h kformulatoolbar.h
+kformula_SOURCES =  kformula_shell.cc  kformula_view.cc matrixwidget.cc \
+	kformula_main.cc kformula_doc.cc kformula.idl BasicElement.cc \
+	RootElement.cc TextElement.cc BracketElement.cc FractionElement.cc\
+	MatrixElement.cc PrefixedElement.cc formula_container.cc
 
-libkformula_la_LDFLAGS = -version-info 3:0 -no-undefined
-libkformula_la_LIBADD  = ../kdeui/libkdeui.la -lm
+noinst_HEADERS = kformula_main.h kformula_doc.h kformula_view.h formuladef.h \
+	kformula_shell.h BasicElement.h RootElement.h TextElement.h\
+	BracketElement.h FractionElement.h MatrixElement.h PrefixedElement.h \
+	matrixwidget.h formula_container.h
 
-libkformula_la_METASOURCES = AUTO
+METASOURCES = kformula_main.moc kformula_view.moc kformula_doc.moc \
+	kformula_shell.moc matrixwidget.moc formula_container.moc
 
-check_PROGRAMS = kformulatest
-kformulatest_SOURCES = kformulatest.cpp
-kformulatest_LDADD = libkformula.la
+idl_DATA = kformula.idl
+kformula.h : $(top_builddir)/lib/kofficecore/koffice.idl
+
+kde_icon_DATA = kformula.xpm
+
+kdelnk_DATA = kformula.desktop
+kdelnkdir = $(kde_appsdir)/Applications/KOffice
+
+####### Implicit rules
+
+####### Build rules
+
+IDL_FLAGS = --relative-paths -I$(top_srcdir)/lib/kofficecore -I$(top_srcdir)/lib/store -I$(idldir)
+
+messages:
+	$(XGETTEXT) -kklocale *.cc -o $(podir)/kformula.pot
 
