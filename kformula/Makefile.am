@@ -1,61 +1,19 @@
-# $Id$
 
-SUBDIRS = . pics
+INCLUDES= $(all_includes)
 
-INCLUDES = $(KOFFICE_INCLUDES) $(all_includes) $(MICO_INCLUDES) -I$(idldir)
-LDFLAGS	= $(all_libraries) $(KDE_RPATH)
-LDADD = ../lib/kofficeui/libkofficeui.la 
+####### 
+# you can add here more. This one gets installed 
+lib_LTLIBRARIES = libkformula.la
+KFORMULAVERSION=	0.0.1
+KFORMULAPATCH=	0
 
-####### Files
+libkformula_la_SOURCES	= box.cc kformula.cc kformulaedit.cc matrixbox.cc \
+			MatrixDialog.cc
 
-bin_PROGRAMS = kformula.bin
+include_HEADERS = box.h kformula.h kformulaedit.h matrixbox.h MatrixDialog.h
 
-AM_CXXFLAGS = -ansi -pedantic
+libkformula_la_LDFLAGS = -version-info 3:0 $(X_LDFLAGS) $(QT_LDFLAGS) $(USER_LDFLAGS)
+libkformula_la_LIBADD  = $(LIB_QT)
 
-kformula_bin_SOURCES =  kformula_view.cc matrixwidget.cc kformula_main.cc \
-	kformula_doc.cc \
-	kformula.cc kformula_shell.cc BasicElement.cc RootElement.cc \
-	TextElement.cc BracketElement.cc FractionElement.cc\
-	MatrixElement.cc PrefixedElement.cc formula_container.cc
+libkformula_la_METASOURCES = kformulaedit.moc MatrixDialog.moc
 
-noinst_HEADERS = kformula_main.h kformula_doc.h kformula_view.h formuladef.h \
-	kformula.h kformula_shell.h BasicElement.h RootElement.h TextElement.h\
-	BracketElement.h FractionElement.h MatrixElement.h PrefixedElement.h \
-	matrixwidget.h formula_container.h
-
-METASOURCES = kformula_main.moc kformula_view.moc kformula_doc.moc \
-	kformula_shell.moc matrixwidget.moc formula_container.moc
-
-DISTCLEANFILES = $(idl_DATA:.idl=.cc) $(idl_HEADERS) $(METASOURCES)
-
-IDL_INCLUDES = -I$(idldir)
-
-idl_DATA = kformula.idl
-idl_HEADERS = kformula.h
-pics_DATA = kformula.xpm
-picsdir = $(kde_icondir)
-kdelnk_DATA = kformula_part.kdelnk
-kdelnkdir = $(kde_datadir)/koffice/partlnk
-
-uninstall-local:
-	-rm $(bindir)/kformula
-
-####### Implicit rules
-
-####### Build rules
-
-install-exec-local:
-	$(INSTALL_SCRIPT) $(srcdir)/kformula $(bindir)/kformula
-
-kformula.h: kformula.idl
-	rm -f kformula.h
-	$(IDL) --query-server-for-narrow --relative-paths -I$(top_srcdir)/lib/kofficecore -I$(top_srcdir)/lib/store -I$(idldir) $(srcdir)/kformula.idl
-
-messages:
-	$(XGETTEXT) -C -ki18n -kklocale -x $(includedir)/kde.pot *.cc && mv messages.po ../po/kformula.pot
-
-kformula.cc: kformula.h
-kformula_view.h: kformula.h
-kformula_shell.h: kformula.h
-$(srcdir)/kformula_main.cc: kformula_view.h kformula.h
-$(srcdir)/kformula_view.cc: kformula.h
