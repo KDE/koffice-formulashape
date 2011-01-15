@@ -4,7 +4,7 @@ set(KFORMULA_INCLUDES
     ${CMAKE_SOURCE_DIR}/kformula
     ${CMAKE_SOURCE_DIR}/kformula/flake
     ${CMAKE_SOURCE_DIR}/kformula/flake/elements
-    ${KOMAIN_INCLUDES}     
+    ${KOKOFFICELIBS_INCLUDE_DIR}
     )
 
 include_directories(${KFORMULA_INCLUDES})
@@ -50,7 +50,7 @@ kde4_add_app_icon(kformula_KDEINIT_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/pics/hi*-ap
 
 kde4_add_kdeinit_executable( kformula_bin ${kformula_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_kformula_bin komain )
+target_link_libraries(kdeinit_kformula_bin ${KOMAIN_LIBS} )
 
 install(TARGETS kdeinit_kformula_bin  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
