@@ -9,4 +9,5 @@ include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${KOFFICELIBS_INCLUDE_DIR})
 
 add_subdirectory(kformula)
 add_subdirectory(filters)
+add_subdirectory(doc)
 
