@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=Formula Shape
+Name[pt_BR]=Forma de fórmula
+Name[sv]=Formelform
+Name[uk]=Форма формули
+Name[x-test]=xxFormula Shapexx
 X-KDE-ServiceTypes=KOffice/Flake
 Type=Service
 X-KDE-Library=formulashape

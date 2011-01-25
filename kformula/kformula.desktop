@@ -1,7 +1,17 @@
 [Desktop Entry]
 Name=KFormula
+Name[cs]=KFormula
+Name[pt_BR]=KFormula
+Name[sv]=Kformula
+Name[uk]=KFormula
+Name[x-test]=xxKFormulaxx
 Exec=kformula %u
 GenericName=Formula Editor
+GenericName[cs]=Editor vzorců
+GenericName[pt_BR]=Editor de fórmulas
+GenericName[sv]=Formeleditor
+GenericName[uk]=Редактор формул
+GenericName[x-test]=xxFormula Editorxx
 MimeType=application/vnd.oasis.opendocument.formula;application/x-kformula;
 Type=Application
 Icon=kformula
