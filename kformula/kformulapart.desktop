@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=KOffice Formula Component
+Name[nds]=Formelkomponent för KOffice
+Name[pt]=Componente de Fórmulas do KOffice
 Name[pt_BR]=Componente de fórmulas do KOffice
 Name[sv]=Koffice formelkomponent
 Name[uk]=Компонент формул KOffice
@@ -13,6 +15,8 @@ X-KDE-NativeOasisMimeType=application/vnd.oasis.opendocument.formula
 X-KDE-ExtraNativeMimeTypes=application/x-kformula,application/vnd.oasis.opendocument.formula-template,text/mathml
 GenericName=Formula Editor
 GenericName[cs]=Editor vzorců
+GenericName[nds]=Formeleditor
+GenericName[pt]=Editor de Fórmulas
 GenericName[pt_BR]=Editor de fórmulas
 GenericName[sv]=Formeleditor
 GenericName[uk]=Редактор формул
