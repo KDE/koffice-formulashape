@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KFormula
 Name[cs]=KFormula
+Name[et]=KFormula
 Name[nds]=KFormula
 Name[nl]=KFormula
 Name[pt]=KFormula
@@ -11,6 +12,7 @@ Name[x-test]=xxKFormulaxx
 Exec=kformula %u
 GenericName=Formula Editor
 GenericName[cs]=Editor vzorců
+GenericName[et]=Valemiredaktor
 GenericName[nds]=Formeleditor
 GenericName[nl]=Formulebewerker
 GenericName[pt]=Editor de Fórmulas
