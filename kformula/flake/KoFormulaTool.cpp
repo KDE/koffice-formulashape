@@ -87,7 +87,7 @@ void KoFormulaTool::activate(ToolActivation toolActivation, const QSet<KoShape*>
         emit done();
         return;
     }
-    useCursor(Qt::IBeamCursor);
+    setCursor(Qt::IBeamCursor);
     m_formulaEditor=0;
     for (int i = 0; i < m_cursorList.count(); i++) {
         FormulaEditor* editor = m_cursorList[i];
