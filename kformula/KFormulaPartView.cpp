@@ -27,7 +27,7 @@
 #include "KFormulaPartFactory.h"
 #include "KFormulaConfigDialog.h"
 #include "KFormulaCanvas.h"
-#include <KoCanvasControllerWidget.h>
+#include <KoCanvasController.h>
 #include <KoZoomHandler.h>
 #include <kstandardaction.h>
 #include <kaction.h>
@@ -50,7 +50,7 @@ KFormulaPartView::KFormulaPartView( KFormulaPartDocument* doc, QWidget* parent )
 
     m_formulaCanvas = new KFormulaCanvas( this, m_partDocument );
     m_zoomHandler = new KoZoomHandler();
-    m_canvasController = new KoCanvasControllerWidget( this );
+    m_canvasController = new KoCanvasController(this);
     m_canvasController->setCanvas( m_formulaCanvas );
 
     if ( !doc->isReadWrite() )
@@ -147,7 +147,7 @@ void KFormulaPartView::setEnabled( bool enabled )
 
 void KFormulaPartView::resizeEvent( QResizeEvent * )
 {
-    static_cast<KoCanvasControllerWidget*>(m_canvasController)->setGeometry( 0, 0, width(), height() );
+    static_cast<KoCanvasController*>(m_canvasController)->setGeometry( 0, 0, width(), height() );
 }
 
 void KFormulaPartView::cursorChanged( bool visible, bool selecting )
