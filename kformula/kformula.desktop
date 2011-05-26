@@ -2,6 +2,7 @@
 Name=KFormula
 Name[cs]=KFormula
 Name[de]=KFormula
+Name[es]=KFormula
 Name[et]=KFormula
 Name[nds]=KFormula
 Name[nl]=KFormula
@@ -14,6 +15,7 @@ Exec=kformula %u
 GenericName=Formula Editor
 GenericName[cs]=Editor vzorců
 GenericName[de]=Formel-Editor
+GenericName[es]=Editor de fórmula
 GenericName[et]=Valemiredaktor
 GenericName[nds]=Formeleditor
 GenericName[nl]=Formulebewerker

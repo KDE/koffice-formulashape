@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KOffice Formula Component
 Name[de]=KOffice-Komponente für Formeln
+Name[es]=Componentes formula de KOffice
 Name[et]=KOffice'i valemikomponent
 Name[nds]=Formelkomponent för KOffice
 Name[nl]=KOffice Formula-component
@@ -19,6 +20,7 @@ X-KDE-ExtraNativeMimeTypes=application/x-kformula,application/vnd.oasis.opendocu
 GenericName=Formula Editor
 GenericName[cs]=Editor vzorců
 GenericName[de]=Formel-Editor
+GenericName[es]=Editor de fórmula
 GenericName[et]=Valemiredaktor
 GenericName[nds]=Formeleditor
 GenericName[nl]=Formulebewerker
