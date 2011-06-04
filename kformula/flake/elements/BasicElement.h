@@ -35,11 +35,12 @@
 class QPainter;
 class QVariant;
 class KoXmlWriter;
-#include "KoXmlReaderForward.h"
 class AttributeManager;
 class FormulaCursor;
 class QPainterPath;
 class TableDataElement;
+class KoXmlElement;
+
 #define DEBUGID 40000
 
 /**

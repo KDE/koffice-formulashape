@@ -31,6 +31,7 @@ class BasicElement;
 class FormulaRenderer;
 class FormulaData;
 class FormulaDocument;
+class KoXmlDocument;
 
 /**
  * @short The flake shape for a formula
