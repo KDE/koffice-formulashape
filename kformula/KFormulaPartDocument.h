@@ -25,15 +25,15 @@
 
 #include <QMap>
 #include <KoDocument.h>
-#include <KoShapeControllerBase.h>
+#include <KShapeControllerBase.h>
 #include "KFormulaPartView.h"
 #include <QPainter>
 #include "kformula_export.h"
 
 class QIODevice;
 class QUndoStack;
-class KoDataCenterBase;
-class KoXmlWriter;
+class KDataCenterBase;
+class KXmlWriter;
 
 class FormulaElement;
 
@@ -46,7 +46,7 @@ class FormulaElement;
  * The actual data KFormulaPartDocument is maintaining is a list of FormulaShape.
  * 
  */
-class KFORMULAPRIVATE_EXPORT KFormulaPartDocument : public KoDocument, public KoShapeControllerBase {
+class KFORMULAPRIVATE_EXPORT KFormulaPartDocument : public KoDocument, public KShapeControllerBase {
 Q_OBJECT
 public:
     /// The basic constructor
@@ -54,13 +54,13 @@ public:
                                    bool singleViewMode = false );
     ~KFormulaPartDocument();
 
-    // KoShapeControllerBase interface
-    /// reimplemented from KoShapeControllerBase
-    void addShape (KoShape *shape);
-    /// reimplemented from KoShapeControllerBase
-    void removeShape (KoShape *shape);
-    /// reimplemented from KoShapeControllerBase
-    virtual QMap<QString, KoDataCenterBase *> dataCenterMap() const;
+    // KShapeControllerBase interface
+    /// reimplemented from KShapeControllerBase
+    void addShape (KShape *shape);
+    /// reimplemented from KShapeControllerBase
+    void removeShape (KShape *shape);
+    /// reimplemented from KShapeControllerBase
+    virtual QMap<QString, KDataCenterBase *> dataCenterMap() const;
 
 
     // KoDocument interface
@@ -71,10 +71,10 @@ public:
     void showStartUpWidget(KoMainWindow* parent, bool alwaysShow = false);
 
     /// reimplemented from KoDocument
-    bool loadXML( const KoXmlDocument & doc, KoStore *store );
+    bool loadXML( const KXmlDocument & doc, KOdfStore *store );
 
     /// reimplemented from KoDocument
-    bool loadOdf( KoOdfReadStore & odfStore );
+    bool loadOdf( KOdfStoreReader & odfStore );
 
     /// reimplemented from KoDocument
     bool saveOdf( SavingContext &documentContext );

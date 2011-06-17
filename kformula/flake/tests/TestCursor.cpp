@@ -26,20 +26,20 @@
 #include "FormulaCommand.h"
 #include "FormulaCommandUpdate.h"
 #include "KoFormulaTool.h"
-#include <KoShapeManager.h>
-#include <KoSelection.h>
-#include <KoCanvasBase.h>
+#include <KShapeManager.h>
+#include <KSelection.h>
+#include <KCanvasBase.h>
 #include <kdebug.h>
 #include <FormulaEditor.h>
 
-class MockCanvas : public KoCanvasBase
+class MockCanvas : public KCanvasBase
 {
 public:
     QUndoStack *stack;
-    KoShapeManager *manager;
-    MockCanvas(): KoCanvasBase(0) {
+    KShapeManager *manager;
+    MockCanvas(): KCanvasBase(0) {
         stack=new QUndoStack();
-        manager=new KoShapeManager(this);
+        manager=new KShapeManager(this);
     }
     ~MockCanvas() {
         delete stack;
@@ -54,14 +54,14 @@ public:
 //         c->redo();
         stack->push(c);
     }
-    KoShapeManager *shapeManager() const  {
+    KShapeManager *shapeManager() const  {
         return manager;
     }
     void updateCanvas(const QRectF&)  {}
-    KoToolProxy * toolProxy() const {
+    KToolProxy * toolProxy() const {
         return 0;
     }
-    KoViewConverter *viewConverter() const {
+    KViewConverter *viewConverter() const {
         return 0;
     }
     QWidget* canvasWidget() {
@@ -70,8 +70,8 @@ public:
     const QWidget* canvasWidget() const {
         return 0;
     }
-    KoUnit unit() const {
-        return KoUnit(KoUnit::Millimeter);
+    KUnit unit() const {
+        return KUnit(KUnit::Millimeter);
     }
     void updateInputMethodInfo() {}
     void setCursor(const QCursor &) {}
@@ -85,9 +85,9 @@ void TestCursor::moveCursor()
     canvas->shapeManager()->selection()->select(shape);
     QCOMPARE(canvas->shapeManager()->selection()->count(),1);
     KoFormulaTool* tool= new KoFormulaTool(canvas);
-    QSet<KoShape*> selectedShapes;
+    QSet<KShape*> selectedShapes;
     selectedShapes << shape;
-    tool->activate(KoToolBase::DefaultActivation, selectedShapes);
+    tool->activate(KToolBase::DefaultActivation, selectedShapes);
     FormulaEditor* editor=tool->formulaEditor();
     FormulaElement* root=editor->formulaData()->formulaElement();
     canvas->addCommand(new FormulaCommandUpdate(shape,editor->insertText("ade")));

@@ -22,19 +22,19 @@
 #include "KFormulaCanvas.h"
 #include "KFormulaPartView.h"
 #include "KFormulaPartDocument.h"
-#include <KoShapeManager.h>
-#include <KoToolManager.h>
-#include <KoToolProxy.h>
+#include <KShapeManager.h>
+#include <KToolManager.h>
+#include <KToolProxy.h>
 #include <QPaintEvent>
 #include <QPainter>
 
 KFormulaCanvas::KFormulaCanvas( KFormulaPartView* view, KFormulaPartDocument* document, QWidget* parent )
-    : KoCanvasBase( document ),
+    : KCanvasBase( document ),
       QWidget( parent ),
       m_view( view )
 {
-    m_toolProxy = new KoToolProxy(this, this);
-    m_shapeManager = new KoShapeManager( this );
+    m_toolProxy = new KToolProxy(this, this);
+    m_shapeManager = new KShapeManager( this );
 
     setFocusPolicy( Qt::StrongFocus );
     setBackgroundRole( QPalette::NoRole );
@@ -126,7 +126,7 @@ void KFormulaCanvas::addCommand( QUndoCommand *command )
     Q_UNUSED( command );
 }
 
-KoShapeManager* KFormulaCanvas::shapeManager() const
+KShapeManager* KFormulaCanvas::shapeManager() const
 {
     return m_shapeManager;
 }
@@ -136,7 +136,7 @@ void KFormulaCanvas::updateCanvas( const QRectF& rc )
     update( viewConverter()->documentToView( rc ).toRect() );
 }
 
-const KoViewConverter* KFormulaCanvas::viewConverter() const
+const KViewConverter* KFormulaCanvas::viewConverter() const
 {
     return m_view->viewConverter();
 }
@@ -150,12 +150,12 @@ const QWidget* KFormulaCanvas::canvasWidget() const
     return this;
 }
 
-KoUnit KFormulaCanvas::unit() const
+KUnit KFormulaCanvas::unit() const
 {
-    return KoUnit( KoUnit::Centimeter );  // return this as default
+    return KUnit( KUnit::Centimeter );  // return this as default
 }
 
-KoToolProxy* KFormulaCanvas::toolProxy() const
+KToolProxy* KFormulaCanvas::toolProxy() const
 {
     return m_toolProxy;
 }

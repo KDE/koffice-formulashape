@@ -19,8 +19,8 @@
 
 #include "FixedElement.h"
 #include "FormulaCursor.h"
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
 #include <QPainter>
 
 #include <kdebug.h>
@@ -175,7 +175,7 @@ int FixedElement::positionOfChild ( BasicElement* child ) const
     }
 }
 
-bool FixedElement::loadElement ( KoXmlElement& tmp, RowElement** child )
+bool FixedElement::loadElement ( KXmlElement& tmp, RowElement** child )
 {
     BasicElement *element;
     element = ElementFactory::createElement( tmp.tagName(), this );

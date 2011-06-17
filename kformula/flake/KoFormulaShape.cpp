@@ -24,16 +24,16 @@
 #include <kmessagebox.h>
 #include <kguiitem.h>
 
-#include <KoStore.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStore.h>
+#include <KOdfStoreReader.h>
 #include <KoDocumentEntry.h>
-#include <KoShapeSavingContext.h>
-#include <KoShapeLoadingContext.h>
-#include <KoOdfLoadingContext.h>
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
-#include <KoXmlNS.h>
-#include <KoResourceManager.h>
+#include <KShapeSavingContext.h>
+#include <KShapeLoadingContext.h>
+#include <KOdfLoadingContext.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
+#include <KOdfXmlNS.h>
+#include <KResourceManager.h>
 
 #include "FormulaDocument.h"
 #include "FormulaData.h"
@@ -41,8 +41,8 @@
 #include "FormulaRenderer.h"
 
 
-KoFormulaShape::KoFormulaShape(KoResourceManager *documentResourceManager)
-  : KoFrameShape( KoXmlNS::draw, "object" )
+KoFormulaShape::KoFormulaShape(KResourceManager *documentResourceManager)
+  : KFrameShape( KOdfXmlNS::draw, "object" )
 {
     FormulaElement* element= new FormulaElement();
     m_formulaData = new FormulaData(element);
@@ -59,7 +59,7 @@ KoFormulaShape::~KoFormulaShape()
     delete m_formulaRenderer;
 }
 
-void KoFormulaShape::paint( QPainter &painter, const KoViewConverter &converter )
+void KoFormulaShape::paint( QPainter &painter, const KViewConverter &converter )
 {
     painter.save();
     applyConversion( painter, converter );   // apply zooming and coordinate translation
@@ -71,7 +71,7 @@ void KoFormulaShape::paint( QPainter &painter, const KoViewConverter &converter 
 void KoFormulaShape::updateLayout() {
     m_formulaRenderer->layoutElement( m_formulaData->formulaElement() );
 
-     KoShape::setSize(m_formulaData->formulaElement()->boundingRect().size());
+     KShape::setSize(m_formulaData->formulaElement()->boundingRect().size());
 }
 
 
@@ -93,18 +93,18 @@ FormulaRenderer* KoFormulaShape::formulaRenderer() const
     return m_formulaRenderer;
 }
 
-bool KoFormulaShape::loadOdf( const KoXmlElement& element, KoShapeLoadingContext &context )
+bool KoFormulaShape::loadOdf( const KXmlElement& element, KShapeLoadingContext &context )
 {
     kDebug() <<"Loading ODF in Formula";
     loadOdfAttributes(element, context, OdfAllAttributes);
     return loadOdfFrame(element, context);
 }
 
-bool KoFormulaShape::loadOdfFrameElement(const KoXmlElement &element,
-                                         KoShapeLoadingContext &context)
+bool KoFormulaShape::loadOdfFrameElement(const KXmlElement &element,
+                                         KShapeLoadingContext &context)
 {
     // If this formula is embedded and not inline, then load the embedded document.
-    if ( element.tagName() == "object" && element.hasAttributeNS( KoXmlNS::xlink, "href" )) {
+    if ( element.tagName() == "object" && element.hasAttributeNS( KOdfXmlNS::xlink, "href" )) {
         m_isInline = false;
 
         // This calls loadOdfEmbedded().
@@ -114,7 +114,7 @@ bool KoFormulaShape::loadOdfFrameElement(const KoXmlElement &element,
     }
 
     // It's not a frame:object, so it must be inline.
-    const KoXmlElement& topLevelElement = KoXml::namedItemNS(element, KoXmlNS::math, "math");
+    const KXmlElement& topLevelElement = KoXml::namedItemNS(element, KOdfXmlNS::math, "math");
     if (topLevelElement.isNull()) {
         kWarning() << "no math element as first child";
         return false;
@@ -132,16 +132,16 @@ bool KoFormulaShape::loadOdfFrameElement(const KoXmlElement &element,
     return true;
 }
 
-bool KoFormulaShape::loadEmbeddedDocument( KoStore *store,
-                                           const KoXmlElement &objectElement,
-                                           const KoXmlDocument &manifestDocument )
+bool KoFormulaShape::loadEmbeddedDocument( KOdfStore *store,
+                                           const KXmlElement &objectElement,
+                                           const KXmlDocument &manifestDocument )
 {
-    if ( !objectElement.hasAttributeNS( KoXmlNS::xlink, "href" ) ) {
+    if ( !objectElement.hasAttributeNS( KOdfXmlNS::xlink, "href" ) ) {
         kError() << "Object element has no valid xlink:href attribute";
         return false;
     }
 
-    QString url = objectElement.attributeNS( KoXmlNS::xlink, "href" );
+    QString url = objectElement.attributeNS( KOdfXmlNS::xlink, "href" );
 
     // It can happen that the url is empty e.g. when it is a
     // presentation:placeholder.
@@ -176,7 +176,7 @@ bool KoFormulaShape::loadEmbeddedDocument( KoStore *store,
     if ( !path.endsWith( '/' ) )
         path += '/';
 
-    const QString mimeType = KoOdfReadStore::mimeForPath( manifestDocument, path );
+    const QString mimeType = KOdfStoreReader::mimeForPath( manifestDocument, path );
     //kDebug(35001) << "path for manifest file=" << path << "mimeType=" << mimeType;
     if ( mimeType.isEmpty() ) {
         //kDebug(35001) << "Manifest doesn't have media-type for" << path;
@@ -252,14 +252,14 @@ bool KoFormulaShape::loadEmbeddedDocument( KoStore *store,
     return res;
 }
 
-bool KoFormulaShape::loadOdfEmbedded( const KoXmlElement &topLevelElement,
-                                      KoShapeLoadingContext &context )
+bool KoFormulaShape::loadOdfEmbedded( const KXmlElement &topLevelElement,
+                                      KShapeLoadingContext &context )
 {
     Q_UNUSED(context);
     kDebug(31000) << topLevelElement.nodeName();
 
 #if 0
-    const KoXmlElement &topLevelElement = KoXml::namedItemNS(element, "http://www.w3.org/1998/Math/MathML", "math");
+    const KXmlElement &topLevelElement = KoXml::namedItemNS(element, "http://www.w3.org/1998/Math/MathML", "math");
     if (topLevelElement.isNull()) {
         kWarning() << "no math element as first child";
         return false;
@@ -276,12 +276,12 @@ bool KoFormulaShape::loadOdfEmbedded( const KoXmlElement &topLevelElement,
 }
 
 
-void KoFormulaShape::saveOdf( KoShapeSavingContext& context ) const
+void KoFormulaShape::saveOdf( KShapeSavingContext& context ) const
 {
     // FIXME: Add saving of embedded document if m_isInline is false;
 
     kDebug() <<"Saving ODF in Formula";
-    KoXmlWriter& writer = context.xmlWriter();
+    KXmlWriter& writer = context.xmlWriter();
     writer.startElement("draw:frame");
     saveOdfAttributes(context, OdfAllAttributes);
     writer.startElement( "draw:object" );
@@ -291,7 +291,7 @@ void KoFormulaShape::saveOdf( KoShapeSavingContext& context ) const
     writer.endElement(); // draw:frame
 }
 
-KoResourceManager *KoFormulaShape::resourceManager() const
+KResourceManager *KoFormulaShape::resourceManager() const
 {
     return m_resourceManager;
 }

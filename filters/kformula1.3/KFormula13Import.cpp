@@ -20,7 +20,7 @@
 #include "KFormula13Import.h"
 #include "KFormula13ContentHandler.h"
 #include <KoFilterChain.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <kpluginfactory.h>
 #include <kmessagebox.h>
 #include <QXmlSimpleReader>

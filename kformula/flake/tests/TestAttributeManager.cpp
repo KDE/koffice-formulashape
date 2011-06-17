@@ -2,7 +2,7 @@
 
 #include <BasicElement.h>
 #include <AttributeManager.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 void TestAttributeManager::initTestCase()
 {

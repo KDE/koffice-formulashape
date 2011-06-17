@@ -132,10 +132,10 @@ public:
 
 protected:
     /// Read contents of the row element
-    bool readMathMLContent( const KoXmlElement& parent );
+    bool readMathMLContent( const KXmlElement& parent );
 
-    /// Write all content to the KoXmlWriter - reimplemented by the child elements
-    void writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const;
+    /// Write all content to the KXmlWriter - reimplemented by the child elements
+    void writeMathMLContent( KXmlWriter* writer, const QString& ns ) const;
 
     /// A list of the child elements
     QList<BasicElement*> m_childElements;

@@ -86,10 +86,10 @@ protected:
 //     void fixSelection (FormulaCursor& cursor);
     
     /// Read root contents - reimplemented from BasicElement
-    bool readMathMLContent( const KoXmlElement& element );
+    bool readMathMLContent( const KXmlElement& element );
 
     /// Write root contents - reimplemented from BasicElement
-    void writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const;
+    void writeMathMLContent( KXmlWriter* writer, const QString& ns ) const;
 
 private:
     /// The element that is the radicand of the root

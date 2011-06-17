@@ -23,8 +23,8 @@
 #include "FractionElement.h"
 #include "FormulaCursor.h"
 #include "AttributeManager.h"
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
 #include <QPainter>
 #include <kdebug.h>
 
@@ -257,9 +257,9 @@ QString FractionElement::attributesDefaultValue( const QString& attribute ) cons
         return QString();
 }
 
-bool FractionElement::readMathMLContent( const KoXmlElement& parent )
+bool FractionElement::readMathMLContent( const KXmlElement& parent )
 {
-    KoXmlElement tmp;
+    KXmlElement tmp;
     int counter=0;
     forEachElement( tmp, parent ) {
         if (counter==0) {
@@ -277,7 +277,7 @@ bool FractionElement::readMathMLContent( const KoXmlElement& parent )
     return true;
 }
 
-void FractionElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void FractionElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     m_numerator->writeMathML( writer, ns );
     m_denominator->writeMathML( writer, ns );

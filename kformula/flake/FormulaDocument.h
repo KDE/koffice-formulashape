@@ -27,10 +27,10 @@
 
 class QIODevice;
 class KoView;
-class KoOdfReadStore;
+class KOdfStoreReader;
 class QPainter;
 class QWidget;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 
 class KoFormulaShape;
 
@@ -40,8 +40,8 @@ public:
     FormulaDocument( KoFormulaShape *parent );
     ~FormulaDocument();
     
-    bool loadOdf( KoOdfReadStore &odfStore );
-    bool loadXML( const KoXmlDocument &doc, KoStore *store );
+    bool loadOdf( KOdfStoreReader &odfStore );
+    bool loadXML( const KXmlDocument &doc, KOdfStore *store );
     
     bool saveOdf( SavingContext &context );
     KoView *createViewInstance( QWidget *parent );

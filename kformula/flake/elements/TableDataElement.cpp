@@ -24,7 +24,7 @@
 #include "FormulaCursor.h"
 #include "TableRowElement.h"
 #include "TableElement.h"
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 TableDataElement::TableDataElement( BasicElement* parent ) : RowElement( parent )
 {}

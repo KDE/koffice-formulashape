@@ -22,8 +22,8 @@
 #include "FormulaCursor.h"
 #include "Dictionary.h"
 #include "GlyphElement.h"
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
 #include <QPainter>
 #include <kdebug.h>
 
@@ -305,13 +305,13 @@ const QString& TokenElement::text()
 }
 
 
-bool TokenElement::readMathMLContent( const KoXmlElement& element )
+bool TokenElement::readMathMLContent( const KXmlElement& element )
 {
     // iterate over all child elements ( possible embedded glyphs ) and put the text
     // content in the m_rawString and mark glyph positions with
     // QChar::ObjectReplacementCharacter
     GlyphElement* tmpGlyph;
-    KoXmlNode node = element.firstChild();
+    KXmlNode node = element.firstChild();
     while( !node.isNull() ) {
         if( node.isElement() && node.toElement().tagName() == "mglyph" ) {
             tmpGlyph = new GlyphElement( this );
@@ -337,7 +337,7 @@ bool TokenElement::readMathMLContent( const KoXmlElement& element )
     return true;
 }
 
-void TokenElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void TokenElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     // split the m_rawString into text content chunks that are divided by glyphs 
     // which are represented as ObjectReplacementCharacter and write each chunk

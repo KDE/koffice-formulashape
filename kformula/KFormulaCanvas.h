@@ -24,12 +24,12 @@
 
 #include <QPixmap>
 #include <QWidget>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 class KFormulaPartView;
 class KFormulaPartDocument;
-class KoShapeManager;
-class KoToolProxy;
+class KShapeManager;
+class KToolProxy;
 
 /**
  * @short The canvas widget displaying the FormulaShape
@@ -38,7 +38,7 @@ class KoToolProxy;
  * and to direct all user inputs to the shape. KFormulaCanvas renders the formula
  * in its paintEvent method.
  */
-class KFormulaCanvas : public KoCanvasBase, public QWidget {
+class KFormulaCanvas : public KCanvasBase, public QWidget {
 public:
     /// The constructor taking arguments for QWidget
     KFormulaCanvas( KFormulaPartView* view, KFormulaPartDocument* document, QWidget* parent = 0 );
@@ -56,16 +56,16 @@ public:
     void addCommand( QUndoCommand* command );
 
     /// reimplemented method from superclass
-    KoShapeManager* shapeManager() const;
+    KShapeManager* shapeManager() const;
 
     /// reimplemented method from superclass
-    KoToolProxy* toolProxy() const;
+    KToolProxy* toolProxy() const;
 
     /// reimplemented method from superclass
     void updateCanvas( const QRectF& rc );
 
     /// reimplemented method from superclass
-    const KoViewConverter* viewConverter() const;
+    const KViewConverter* viewConverter() const;
 
     /// reimplemented method from superclass
     QWidget* canvasWidget();
@@ -73,7 +73,7 @@ public:
     virtual const QWidget* canvasWidget() const;
 
     /// reimplemented method from superclass
-    KoUnit unit() const;
+    KUnit unit() const;
 
     /// reimplemented method from superclass
     virtual void updateInputMethodInfo();
@@ -100,9 +100,9 @@ private:
     KFormulaPartView* m_view;
 
     /// The proxy used to forward events
-    KoToolProxy* m_toolProxy;
+    KToolProxy* m_toolProxy;
 
-    KoShapeManager* m_shapeManager;
+    KShapeManager* m_shapeManager;
 };
 
 #endif // KFORMULACANVAS_H

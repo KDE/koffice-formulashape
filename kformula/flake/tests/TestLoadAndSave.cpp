@@ -25,8 +25,8 @@
 #include <QtCore/QBuffer>
 #include <QDebug>
 
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
 
 #include "BasicElement.h"
 #include "IdentifierElement.h"
@@ -55,12 +55,12 @@
 
 static QString loadAndSave( BasicElement* element, const QString& input )
 {
-    KoXmlDocument doc;
+    KXmlDocument doc;
     doc.setContent( input );
     element->readMathML( doc.documentElement() );
     QBuffer device;
     device.open( QBuffer::ReadWrite );
-    KoXmlWriter writer( &device );
+    KXmlWriter writer( &device );
     element->writeMathML( &writer, "" );
     device.seek( 0 );
     return device.readAll();
@@ -107,7 +107,7 @@ void TestLoadAndSave::identifierElement_data()
     // See section 2.4.6 Collapsing Whitespace in Input
     addRow( "<mi> a b c </mi>",
             "<mi>a b c</mi>" );
-    // Since newline is hardcoded in KoXmlWriter and it's sematically equivalent, add it to expected result
+    // Since newline is hardcoded in KXmlWriter and it's sematically equivalent, add it to expected result
     addRow( "<mi> x <mglyph fontfamily=\"testfont\" index=\"99\" alt=\"c\"/> d </mi>",
             "<mi>x \n <mglyph fontfamily=\"testfont\" index=\"99\" alt=\"c\"/> d</mi>" );
     addRow( "<mi> x  y    z   </mi>",

@@ -76,10 +76,10 @@ public:
     virtual bool setCursorTo ( FormulaCursor& cursor, QPointF point );
 protected:
     /// Read all content from the node
-    bool readMathMLContent( const KoXmlElement& element );
+    bool readMathMLContent( const KXmlElement& element );
 
-    /// Write all content to the KoXmlWriter
-    void writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const;
+    /// Write all content to the KXmlWriter
+    void writeMathMLContent( KXmlWriter* writer, const QString& ns ) const;
 
 private:
     /// The base element 

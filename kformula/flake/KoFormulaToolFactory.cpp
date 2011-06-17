@@ -24,7 +24,7 @@
 #include <klocale.h>
 
 KoFormulaToolFactory::KoFormulaToolFactory( QObject* parent )
-           : KoToolFactoryBase(parent, "KoFormulaToolFactoryId")
+           : KToolFactoryBase(parent, "KoFormulaToolFactoryId")
 {
     setToolTip( i18n( "Formula editing tool" ) );
     setToolType( dynamicToolType() );
@@ -36,7 +36,7 @@ KoFormulaToolFactory::KoFormulaToolFactory( QObject* parent )
 KoFormulaToolFactory::~KoFormulaToolFactory()
 {}
 
-KoToolBase* KoFormulaToolFactory::createTool( KoCanvasBase* canvas )
+KToolBase* KoFormulaToolFactory::createTool( KCanvasBase* canvas )
 {
     return new KoFormulaTool( canvas );
 }

@@ -24,7 +24,7 @@
 #include "AttributeManager.h"
 #include "TableRowElement.h"
 #include "FormulaCursor.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <QPainter>
 #include <QList>
 #include <kdebug.h>
@@ -314,10 +314,10 @@ QString TableElement::attributesDefaultValue( const QString& attribute ) const
         return QString();
 }
 
-bool TableElement::readMathMLContent( const KoXmlElement& element )
+bool TableElement::readMathMLContent( const KXmlElement& element )
 {  
     BasicElement* tmpElement = 0;
-    KoXmlElement tmp;
+    KXmlElement tmp;
     forEachElement( tmp, element )   // iterate over the elements
     {
         tmpElement = ElementFactory::createElement( tmp.tagName(), this );
@@ -331,7 +331,7 @@ bool TableElement::readMathMLContent( const KoXmlElement& element )
     return true;
 }
 
-void TableElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void TableElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     foreach( TableRowElement* tmpRow, m_rows ) {  // write each mtr element
         tmpRow->writeMathML( writer, ns );

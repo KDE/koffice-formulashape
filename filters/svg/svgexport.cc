@@ -27,8 +27,8 @@
 #include <kmessagebox.h>
 
 #include <KoFilterChain.h>
-#include <KoStore.h>
-//#include <KoStoreDevice.h>
+#include <KOdfStore.h>
+//#include <KOdfStorageDevice.h>
 #include <kpluginfactory.h>
 
 #include <kformulacontainer.h>
@@ -58,7 +58,7 @@ SvgExport::convert(const QByteArray& from, const QByteArray& to)
         return KoFilter::NotImplemented;
 
     // Read the contents of the KFormula file
-    KoStoreDevice* storeIn = m_chain->storageFile("root", KoStore::Read);
+    KOdfStorageDevice* storeIn = m_chain->storageFile("root", KOdfStore::Read);
     if (!storeIn) {
         KMessageBox::error(0, i18n("Failed to read data."),
                            i18n("SVG Export Error"));

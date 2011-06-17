@@ -20,8 +20,8 @@
 #include "KoFormulaToolFactory.h"
 #include "KoFormulaShapeFactory.h"
 
-#include <KoShapeRegistry.h>
-#include <KoToolRegistry.h>
+#include <KShapeRegistry.h>
+#include <KToolRegistry.h>
 
 #include <kpluginfactory.h>
 
@@ -31,8 +31,8 @@ K_EXPORT_PLUGIN(KoFormulaShapePluginFactory("FormulaShape"))
 KoFormulaShapePlugin::KoFormulaShapePlugin( QObject* parent, const QVariantList& )
                     : QObject( parent )
 {
-    KoToolRegistry::instance()->add( new KoFormulaToolFactory( parent ) );
-    KoShapeRegistry::instance()->add( new KoFormulaShapeFactory( parent ) );
+    KToolRegistry::instance()->add( new KoFormulaToolFactory( parent ) );
+    KShapeRegistry::instance()->add( new KoFormulaShapeFactory( parent ) );
 }
 
 KoFormulaShapePlugin::~KoFormulaShapePlugin()

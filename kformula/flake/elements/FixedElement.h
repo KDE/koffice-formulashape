@@ -22,7 +22,7 @@
 
 #include "BasicElement.h"
 #include "kformula_export.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 
 class FormulaCursor;
@@ -51,7 +51,7 @@ public:
 
     virtual QLineF cursorLine ( int position ) const;
 
-    bool loadElement(KoXmlElement& tmp, RowElement** child);
+    bool loadElement(KXmlElement& tmp, RowElement** child);
 
     virtual QPainterPath selectionRegion ( const int pos1, const int pos2 ) const;
 

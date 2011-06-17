@@ -24,8 +24,8 @@
 #include <QtTest/QtTest>
 #include <QtCore/QBuffer>
 
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
 
 #include "BasicElement.h"
 #include "IdentifierElement.h"
@@ -54,7 +54,7 @@
 
 static void load(BasicElement* element, const QString& input)
 {
-    KoXmlDocument doc;
+    KXmlDocument doc;
     doc.setContent( input );
     element->readMathML(doc.documentElement());
 }

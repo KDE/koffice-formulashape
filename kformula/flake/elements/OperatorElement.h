@@ -54,7 +54,7 @@ public:
     virtual bool insertText ( int position, const QString& text );
     
     /// Inherited from TokenElement
-    virtual bool readMathMLContent ( const KoXmlElement& parent );
+    virtual bool readMathMLContent ( const KXmlElement& parent );
     
     /** Reimplemented from BaseElement
      *  Sets the height() and baseLine() of the element based on the parent size

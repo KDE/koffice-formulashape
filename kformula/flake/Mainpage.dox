@@ -1,7 +1,7 @@
 /**
  * \mainpage KoFormulaShape
  *
- * KoFormulaShape is a flake shape ( derived from KoShape ) that implements the
+ * KoFormulaShape is a flake shape ( derived from KShape ) that implements the
  * functionality to edit and show a mathematical formula. Its structure is highly
  * related to the MathML markup language which is the ODF standard format for
  * formula markup. At the moment the KoFormulaShape implements only parts of the

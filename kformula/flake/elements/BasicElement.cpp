@@ -23,8 +23,8 @@
 
 #include "BasicElement.h"
 #include "AttributeManager.h"
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
 #include <QPainter>
 #include <QVariant>
 
@@ -192,13 +192,13 @@ QString BasicElement::attributesDefaultValue( const QString& ) const
     return QString();  // do nothing
 }
 
-bool BasicElement::readMathML( const KoXmlElement& element )
+bool BasicElement::readMathML( const KXmlElement& element )
 {
     readMathMLAttributes( element );
     return readMathMLContent( element );
 }
 
-bool BasicElement::readMathMLAttributes( const KoXmlElement& element )
+bool BasicElement::readMathMLAttributes( const KXmlElement& element )
 {
     QStringList attributeList = KoXml::attributeNames( element );
     foreach( const QString &attributeName, attributeList ) {
@@ -208,13 +208,13 @@ bool BasicElement::readMathMLAttributes( const KoXmlElement& element )
     return true;
 }
 
-bool BasicElement::readMathMLContent( const KoXmlElement& parent )
+bool BasicElement::readMathMLContent( const KXmlElement& parent )
 {
     Q_UNUSED( parent )
     return true;
 }
 
-void BasicElement::writeMathML( KoXmlWriter* writer, const QString& ns ) const
+void BasicElement::writeMathML( KXmlWriter* writer, const QString& ns ) const
 {
     if (elementType() == Basic || elementType() == Unknown) {
         return;
@@ -246,13 +246,13 @@ void BasicElement::writeMathML( KoXmlWriter* writer, const QString& ns ) const
     }
 }
 
-void BasicElement::writeMathMLAttributes( KoXmlWriter* writer ) const
+void BasicElement::writeMathMLAttributes( KXmlWriter* writer ) const
 {
     foreach( const QString &value, m_attributes )
         writer->addAttribute( m_attributes.key( value ).toLatin1(), value );
 }
 
-void BasicElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void BasicElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     Q_UNUSED( writer )   // this is just to be reimplemented
     Q_UNUSED( ns )   // this is just to be reimplemented

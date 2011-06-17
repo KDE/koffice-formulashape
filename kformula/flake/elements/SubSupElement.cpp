@@ -21,8 +21,8 @@
 #include "SubSupElement.h"
 #include "FormulaCursor.h"
 #include "AttributeManager.h"
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
 #include <QPainter>
 #include <kdebug.h>
 
@@ -149,9 +149,9 @@ ElementType SubSupElement::elementType() const
     return m_elementType;
 }
 
-bool SubSupElement::readMathMLContent( const KoXmlElement& parent )
+bool SubSupElement::readMathMLContent( const KXmlElement& parent )
 {
-    KoXmlElement tmp;
+    KXmlElement tmp;
     int counter = 0;
     forEachElement( tmp, parent ) {
         switch (counter) {
@@ -192,7 +192,7 @@ bool SubSupElement::readMathMLContent( const KoXmlElement& parent )
     return true;
 }
 
-void SubSupElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void SubSupElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     // just save the children in the right order
     m_baseElement->writeMathML( writer, ns );

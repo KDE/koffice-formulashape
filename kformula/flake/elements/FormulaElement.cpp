@@ -24,7 +24,7 @@
 #include "FormulaElement.h"
 #include "FormulaCursor.h"
 #include "ElementFactory.h"
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 FormulaElement::FormulaElement() : RowElement( 0 )
 {
@@ -35,7 +35,7 @@ ElementType FormulaElement::elementType() const
     return Formula;
 }
 
-void FormulaElement::writeMathMLAttributes(KoXmlWriter* writer) const
+void FormulaElement::writeMathMLAttributes(KXmlWriter* writer) const
 {
     writer->addAttribute("xmlns","http://www.w3.org/1998/Math/MathML");
 }

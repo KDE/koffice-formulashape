@@ -20,18 +20,18 @@
 #ifndef KOFORMULASHAPE_H
 #define KOFORMULASHAPE_H
 
-#include <KoShape.h>
+#include <KShape.h>
 #define KoFormulaShapeId "FormulaShapeID"
-#include <KoFrameShape.h>
+#include <KFrameShape.h>
 
-class KoStore;
-class KoResourceManager;
+class KOdfStore;
+class KResourceManager;
 
 class BasicElement;
 class FormulaRenderer;
 class FormulaData;
 class FormulaDocument;
-class KoXmlDocument;
+class KXmlDocument;
 
 /**
  * @short The flake shape for a formula
@@ -45,17 +45,17 @@ class KoXmlDocument;
  *
  * @author Martin Pfeiffer <hubipete@gmx.net>
  */
-class KoFormulaShape : public KoShape, public KoFrameShape {
+class KoFormulaShape : public KShape, public KFrameShape {
 public:
     /// The basic constructor
-    KoFormulaShape(KoResourceManager *documentResourceManager);
+    KoFormulaShape(KResourceManager *documentResourceManager);
     //KoFormulaShape();
 
     /// The basic destructor
     ~KoFormulaShape();
 
-    /// inherited from KoShape
-    void paint( QPainter &painter, const KoViewConverter &converter );
+    /// inherited from KShape
+    void paint( QPainter &painter, const KViewConverter &converter );
     
     void updateLayout();
     
@@ -75,27 +75,27 @@ public:
     FormulaRenderer* formulaRenderer() const;
     
     /**
-     * Load a shape from odf - reimplemented from KoShape
-     * @param context the KoShapeLoadingContext used for loading
+     * Load a shape from odf - reimplemented from KShape
+     * @param context the KShapeLoadingContext used for loading
      * @param element element which represents the shape in odf
      * @return false if loading failed
      */ 
-    bool loadOdf( const KoXmlElement& element, KoShapeLoadingContext& context );
+    bool loadOdf( const KXmlElement& element, KShapeLoadingContext& context );
 
-    virtual bool loadOdfFrameElement(const KoXmlElement& element, KoShapeLoadingContext& context);
-    bool loadEmbeddedDocument(KoStore *store,const KoXmlElement &objectElement,
-                              const KoXmlDocument &manifestDocument); // private?
-    bool loadOdfEmbedded(const KoXmlElement &mathElement, KoShapeLoadingContext &context);
+    virtual bool loadOdfFrameElement(const KXmlElement& element, KShapeLoadingContext& context);
+    bool loadEmbeddedDocument(KOdfStore *store,const KXmlElement &objectElement,
+                              const KXmlDocument &manifestDocument); // private?
+    bool loadOdfEmbedded(const KXmlElement &mathElement, KShapeLoadingContext &context);
 
     /**
-     * @brief store the shape data as ODF XML. - reimplemented from KoShape
+     * @brief store the shape data as ODF XML. - reimplemented from KShape
      * This is the method that will be called when saving a shape as a described in
      * OpenDocument 9.2 Drawing Shapes.
      * @see saveOdfAttributes
      */ 
-    void saveOdf( KoShapeSavingContext& context ) const;
+    void saveOdf( KShapeSavingContext& context ) const;
 
-    KoResourceManager *resourceManager() const;
+    KResourceManager *resourceManager() const;
 
 private:
     /// The data this shape displays
@@ -108,7 +108,7 @@ private:
     bool m_isInline;
 
     FormulaDocument *m_document;
-    KoResourceManager *m_resourceManager;
+    KResourceManager *m_resourceManager;
 };
 
 #endif // KOFORMULASHAPE_H

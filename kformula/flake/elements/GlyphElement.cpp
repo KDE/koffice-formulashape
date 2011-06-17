@@ -20,8 +20,8 @@
 #include "GlyphElement.h"
 #include "AttributeManager.h"
 
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
 
 #include <QFontDatabase>
 #include <QFontMetricsF>
@@ -62,7 +62,7 @@ ElementType GlyphElement::elementType() const
     return Glyph;
 }
 
-bool GlyphElement::readMathMLAttributes( const KoXmlElement& element )
+bool GlyphElement::readMathMLAttributes( const KXmlElement& element )
 {
     // MathML Section 3.2.9.2
     m_fontFamily = element.attribute( "fontfamily" );
@@ -93,14 +93,14 @@ bool GlyphElement::readMathMLAttributes( const KoXmlElement& element )
     return true;
 }
 
-void GlyphElement::writeMathMLAttributes( KoXmlWriter* writer ) const
+void GlyphElement::writeMathMLAttributes( KXmlWriter* writer ) const
 {
     writer->addAttribute( "fontfamily", m_fontFamily );
     writer->addAttribute( "index", m_char.unicode() );
     writer->addAttribute( "alt", m_alt );
 }
 
-void GlyphElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void GlyphElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     Q_UNUSED( writer )
     Q_UNUSED( ns )

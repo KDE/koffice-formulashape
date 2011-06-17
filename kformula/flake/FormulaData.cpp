@@ -22,7 +22,7 @@
 #include "FormulaData.h"
 #include "FormulaCommand.h"
 #include "KoFormulaShape.h"
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 
 FormulaData::FormulaData(FormulaElement* element)
@@ -58,7 +58,7 @@ void FormulaData::writeElementTree()
     m_element->writeElementTree();
 }
 
-void FormulaData::saveMathML(KoShapeSavingContext& context)
+void FormulaData::saveMathML(KShapeSavingContext& context)
 {
     context.xmlWriter().startDocument( "math", "http://www.w3.org/1998/Math/MathML" );
     formulaElement()->writeMathML( &context.xmlWriter() );

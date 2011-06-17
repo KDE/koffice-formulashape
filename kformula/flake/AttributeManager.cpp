@@ -20,13 +20,13 @@
 #include "AttributeManager.h"
 #include "BasicElement.h"
 #include "ElementFactory.h"
-#include <KoUnit.h>
-#include <KoViewConverter.h>
-#include <KoPostscriptPaintDevice.h>
+#include <KUnit.h>
+#include <KViewConverter.h>
+#include <KPostscriptPaintDevice.h>
 #include <QFontMetricsF>
 #include <QColor>
 #include <kdebug.h>
-//// Copied from koffice KoUnit.h
+//// Copied from koffice KUnit.h
 //
 //// 1 inch ^= 72 pt
 //// 1 inch ^= 25.399956 mm (-pedantic ;p)
@@ -379,7 +379,7 @@ QFont AttributeManager::font( const BasicElement* element ) const
     return font;
 }
 
-void AttributeManager::setViewConverter( KoViewConverter* converter )
+void AttributeManager::setViewConverter( KViewConverter* converter )
 {
     m_viewConverter = converter;
 }

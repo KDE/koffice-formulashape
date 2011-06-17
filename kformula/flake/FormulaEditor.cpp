@@ -41,8 +41,8 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <QUndoCommand>
-#include <KoOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfLoadingContext.h>
+#include <KOdfStylesReader.h>
 
 FormulaEditor::FormulaEditor( FormulaCursor cursor, FormulaData* data )
 {
@@ -92,7 +92,7 @@ FormulaCommand* FormulaEditor::insertText( const QString& text )
 FormulaCommand* FormulaEditor::insertMathML( const QString& data )
 {
     // setup a DOM structure and start the actual loading process
-    KoXmlDocument tmpDocument;
+    KXmlDocument tmpDocument;
     tmpDocument.setContent( QString(data), false, 0, 0, 0 );
     BasicElement* element=ElementFactory::createElement(tmpDocument.documentElement().tagName(),0);
     element->readMathML( tmpDocument.documentElement() );     // and load the new formula

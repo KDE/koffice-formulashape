@@ -21,7 +21,7 @@
 #ifndef KOFORMULATOOL_H
 #define KOFORMULATOOL_H
 
-#include <KoToolBase.h>
+#include <KToolBase.h>
 
 class KoFormulaShape;
 class BasicElement;
@@ -33,29 +33,29 @@ class QSignalMapper;
  * @short The flake tool for a formula
  * @author Martin Pfeiffer <hubipete@gmx.net>
  */
-class KoFormulaTool : public KoToolBase {
+class KoFormulaTool : public KToolBase {
     Q_OBJECT
 public:
     /// The standard constructor
-    explicit KoFormulaTool( KoCanvasBase *canvas );
+    explicit KoFormulaTool( KCanvasBase *canvas );
 
     /// The standard destructor
     ~KoFormulaTool();
 
     /// reimplemented
-    void paint( QPainter &painter, const KoViewConverter &converter );
+    void paint( QPainter &painter, const KViewConverter &converter );
 
     /// reimplemented
-    void mousePressEvent( KoPointerEvent *event ) ;
+    void mousePressEvent( KPointerEvent *event ) ;
 
     /// reimplemented
-    void mouseDoubleClickEvent( KoPointerEvent *event );
+    void mouseDoubleClickEvent( KPointerEvent *event );
 
     /// reimplemented
-    void mouseMoveEvent( KoPointerEvent *event );
+    void mouseMoveEvent( KPointerEvent *event );
 
     /// reimplemented
-    void mouseReleaseEvent( KoPointerEvent *event );
+    void mouseReleaseEvent( KPointerEvent *event );
 
     void keyPressEvent( QKeyEvent *event );
 
@@ -74,7 +74,7 @@ public:
 
 public slots:
     /// Called when this tool instance is activated and fills m_formulaShape
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 
     /// Called when this tool instance is deactivated
     void deactivate();

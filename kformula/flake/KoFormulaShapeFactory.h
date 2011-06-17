@@ -20,9 +20,9 @@
 #ifndef KOFORMULASHAPEFACTORY_H
 #define KOFORMULASHAPEFACTORY_H
 
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 
-class KoShape;
+class KShape;
 
 /**
  * @short Factory for the formula shape
@@ -30,22 +30,22 @@ class KoShape;
  * This class is a part of the FormulaShape plugin and provides a generic
  * way to obtain instances of the KoFormulaShape class.
  * It follows the factory design pattern and implements the two virtual methods 
- * createDefaultShape() and createShape() of KoShapeFactoryBase.
+ * createDefaultShape() and createShape() of KShapeFactoryBase.
  */
-class KoFormulaShapeFactory : public KoShapeFactoryBase {
+class KoFormulaShapeFactory : public KShapeFactoryBase {
     Q_OBJECT
 
 public:
-    /// The constructor - reimplemented from KoShapeFactoryBase
+    /// The constructor - reimplemented from KShapeFactoryBase
     explicit KoFormulaShapeFactory( QObject *parent );
 
-    /// The destructor - reimplemented from KoShapeFactoryBase
+    /// The destructor - reimplemented from KShapeFactoryBase
     ~KoFormulaShapeFactory();
 
     /// reimplemented
-    virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
 
-    virtual bool supports(const KoXmlElement& e, KoShapeLoadingContext &context) const;
+    virtual bool supports(const KXmlElement& e, KShapeLoadingContext &context) const;
 };
 
 #endif // KOFORMULASHAPEFACTORY_H

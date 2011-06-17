@@ -26,7 +26,7 @@
 #include "FormulaCursor.h"
 #include "TableDataElement.h"
 #include "AttributeManager.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <QStringList>
 #include <QPainter>
 #include <kdebug.h>
@@ -249,10 +249,10 @@ QList<Align> TableRowElement::alignments( Qt::Orientation orientation )
     return alignList;
 }
 
-bool TableRowElement::readMathMLContent( const KoXmlElement& element )
+bool TableRowElement::readMathMLContent( const KXmlElement& element )
 {
     BasicElement* tmpElement = 0;
-    KoXmlElement tmp;
+    KXmlElement tmp;
     forEachElement( tmp, element ) {
         tmpElement = ElementFactory::createElement( tmp.tagName(), this );
         if (tmpElement->elementType() != TableData)
@@ -265,7 +265,7 @@ bool TableRowElement::readMathMLContent( const KoXmlElement& element )
     return true;
 }
 
-void TableRowElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void TableRowElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     foreach( TableDataElement* tmpData, m_data ) {
         tmpData->writeMathML( writer, ns );

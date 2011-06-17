@@ -22,9 +22,9 @@
 
 #include "RowElement.h"
 #include "FormulaCursor.h"
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
+#include <KOdfXmlNS.h>
 #include <QPainter>
 
 #include <kdebug.h>
@@ -233,18 +233,18 @@ ElementType RowElement::elementType() const
     return Row;
 }
 
-bool RowElement::readMathMLContent( const KoXmlElement& parent )
+bool RowElement::readMathMLContent( const KXmlElement& parent )
 {
-    KoXmlElement realParent = parent;
+    KXmlElement realParent = parent;
 
     // Go deeper in the xml tree and 'skip' the semantics elements.
-    while (!realParent.namedItemNS( KoXmlNS::math, "semantics" ).isNull()) {            // while there is a child 'semantics'
-        realParent = realParent.namedItemNS( KoXmlNS::math, "semantics" ).toElement();  // move to it
+    while (!realParent.namedItemNS( KOdfXmlNS::math, "semantics" ).isNull()) {            // while there is a child 'semantics'
+        realParent = realParent.namedItemNS( KOdfXmlNS::math, "semantics" ).toElement();  // move to it
     }
 
     // Read the actual content.
     BasicElement* tmpElement = 0;
-    KoXmlElement tmp;
+    KXmlElement tmp;
     forEachElement ( tmp, realParent ) {
         tmpElement = ElementFactory::createElement( tmp.tagName(), this );
         Q_ASSERT( tmpElement );
@@ -288,7 +288,7 @@ int RowElement::positionOfChild(BasicElement* child) const {
     return m_childElements.indexOf(child);
 }
 
-void RowElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void RowElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     foreach( BasicElement* tmp, m_childElements )
         tmp->writeMathML( writer, ns );

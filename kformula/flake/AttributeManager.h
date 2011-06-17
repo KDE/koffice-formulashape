@@ -23,7 +23,7 @@
 #include <QFont>
 #include "kformula_export.h"
 
-class KoViewConverter;
+class KViewConverter;
 class BasicElement;
 
 /** Enum encoding all possibilities to align */
@@ -201,8 +201,8 @@ public:
     /// @return The font that is set for @p element 
     QFont font( const BasicElement* element ) const;
 
-    /// Set the KoViewConverter to use
-    void setViewConverter( KoViewConverter* converter );
+    /// Set the KViewConverter to use
+    void setViewConverter( KViewConverter* converter );
 
     /// @return The parsed the @p value into a Qt::PenStyle
     Qt::PenStyle parsePenStyle( const QString& value ) const;
@@ -219,8 +219,8 @@ public:
     /// Convert a math space string, such as "thinmathspace", to a size in pixels
     qreal parseMathSpace( const QString& value, const BasicElement *element ) const;
 
-    /// The KoViewConverter used to determine the point values of pixels
-    KoViewConverter* m_viewConverter;
+    /// The KViewConverter used to determine the point values of pixels
+    KViewConverter* m_viewConverter;
 };
 
 #endif // ATTRIBUTEMANAGER_H

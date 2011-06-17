@@ -36,8 +36,8 @@
 
 #include <kdebug.h>
 #include <QUndoCommand>
-#include <KoOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfLoadingContext.h>
+#include <KOdfStylesReader.h>
 
 FormulaCursor::FormulaCursor(BasicElement* element, bool selecting, int position, int mark) {
     m_currentElement=element;

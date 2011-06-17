@@ -30,16 +30,16 @@
 
 // KOffice
 #include <KoDocument.h>
-#include <KoXmlWriter.h>
-#include <KoOdfReadStore.h>
-#include <KoOdfWriteStore.h>
-#include <KoOdfLoadingContext.h>
-#include <KoShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
-#include <KoXmlNS.h>
-#include <KoOdfStylesReader.h>
-#include <KoGenStyles.h>
-#include <KoEmbeddedDocumentSaver.h>
+#include <KXmlWriter.h>
+#include <KOdfStoreReader.h>
+#include <KOdfWriteStore.h>
+#include <KOdfLoadingContext.h>
+#include <KShapeLoadingContext.h>
+#include <KShapeSavingContext.h>
+#include <KOdfXmlNS.h>
+#include <KOdfStylesReader.h>
+#include <KOdfGenericStyles.h>
+#include <KOdfEmbeddedDocumentSaver.h>
 #include <KoView.h>
 #include <KComponentData>
 #include <KDebug>
@@ -71,7 +71,7 @@ FormulaDocument::FormulaDocument( KoFormulaShape *parent )
 {
     d->parent = parent;
     // Needed by KoDocument::nativeOasisMimeType().
-    // KoEmbeddedDocumentSaver uses that method to
+    // KOdfEmbeddedDocumentSaver uses that method to
     // get the mimetype of the embedded document.
     setComponentData( KComponentData( "math" ) );
 }
@@ -82,10 +82,10 @@ FormulaDocument::~FormulaDocument()
 }
 
 
-bool FormulaDocument::loadOdf( KoOdfReadStore &odfStore )
+bool FormulaDocument::loadOdf( KOdfStoreReader &odfStore )
 {
-    KoXmlDocument doc = odfStore.contentDoc();
-    KoXmlElement  bodyElement = doc.documentElement();
+    KXmlDocument doc = odfStore.contentDoc();
+    KXmlElement  bodyElement = doc.documentElement();
 
     kDebug(31000) << bodyElement.nodeName();
 
@@ -98,18 +98,18 @@ bool FormulaDocument::loadOdf( KoOdfReadStore &odfStore )
     // always have a <math:semantics> element that surrounds the
     // actual formula.  I have to check with the MathML spec what this
     // actually means and if it is obligatory.  /iw
-    KoXmlNode semanticsNode = bodyElement.namedItemNS( KoXmlNS::math, "semantics" );
+    KXmlNode semanticsNode = bodyElement.namedItemNS( KOdfXmlNS::math, "semantics" );
     if ( !semanticsNode.isNull() ) {
         bodyElement = semanticsNode.toElement();
     }
 
-    KoOdfLoadingContext   odfLoadingContext( odfStore.styles(), odfStore.store() );
-    KoShapeLoadingContext context(odfLoadingContext, d->parent->resourceManager());
+    KOdfLoadingContext   odfLoadingContext( odfStore.styles(), odfStore.store() );
+    KShapeLoadingContext context(odfLoadingContext, d->parent->resourceManager());
 
     return d->parent->loadOdfEmbedded( bodyElement, context );
 }
 
-bool FormulaDocument::loadXML( const KoXmlDocument &doc, KoStore *)
+bool FormulaDocument::loadXML( const KXmlDocument &doc, KOdfStore *)
 {
     Q_UNUSED( doc );
 
@@ -122,21 +122,21 @@ bool FormulaDocument::saveOdf( SavingContext &context )
     // FIXME: This code is copied from ChartDocument, so it needs to
     // be adapted to the needs of the KoFormulaShape.
 
-    KoOdfWriteStore &odfStore = context.odfStore;
-    KoStore *store = odfStore.store();
-    KoXmlWriter *manifestWriter = odfStore.manifestWriter();
-    KoXmlWriter *contentWriter  = odfStore.contentWriter();
+    KOdfWriteStore &odfStore = context.odfStore;
+    KOdfStore *store = odfStore.store();
+    KXmlWriter *manifestWriter = odfStore.manifestWriter();
+    KXmlWriter *contentWriter  = odfStore.contentWriter();
     if ( !contentWriter )
         return false;
 
-    KoGenStyles mainStyles;
-    KoXmlWriter *bodyWriter = odfStore.bodyWriter();
+    KOdfGenericStyles mainStyles;
+    KXmlWriter *bodyWriter = odfStore.bodyWriter();
     if ( !bodyWriter )
         return false;
 
-    KoEmbeddedDocumentSaver& embeddedSaver = context.embeddedSaver;
+    KOdfEmbeddedDocumentSaver& embeddedSaver = context.embeddedSaver;
 
-    KoShapeSavingContext savingContext( *bodyWriter, mainStyles, embeddedSaver );
+    KShapeSavingContext savingContext( *bodyWriter, mainStyles, embeddedSaver );
 
     bodyWriter->startElement( "office:body" );
     bodyWriter->startElement( "office:formula" );
@@ -146,7 +146,7 @@ bool FormulaDocument::saveOdf( SavingContext &context )
     bodyWriter->endElement(); // office:formula
     bodyWriter->endElement(); // office:body
 
-    mainStyles.saveOdfStyles( KoGenStyles::DocumentAutomaticStyles, contentWriter );
+    mainStyles.saveOdfStyles( KOdfGenericStyles::DocumentAutomaticStyles, contentWriter );
     odfStore.closeContentWriter();
 
     // Add manifest line for content.xml and styles.xml

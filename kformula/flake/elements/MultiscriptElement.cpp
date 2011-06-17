@@ -20,8 +20,8 @@
 
 #include "MultiscriptElement.h"
 #include "AttributeManager.h"
-#include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlWriter.h>
+#include <KXmlReader.h>
 #include <QPainter>
 #include "FormulaCursor.h"
 #include "kdebug.h"
@@ -256,11 +256,11 @@ ElementType MultiscriptElement::elementType() const
     return MultiScript;
 }
 
-bool MultiscriptElement::readMathMLContent( const KoXmlElement& parent )
+bool MultiscriptElement::readMathMLContent( const KXmlElement& parent )
 {
     QString name = parent.tagName().toLower();
     BasicElement* tmpElement = 0;
-    KoXmlElement tmp;
+    KXmlElement tmp;
     bool prescript = false; //When we see a mprescripts tag, we enable this
     bool baseElement = false;   // True when the base element is read.
     forEachElement( tmp, parent ) {
@@ -301,7 +301,7 @@ bool MultiscriptElement::readMathMLContent( const KoXmlElement& parent )
     return true;
 }
 
-void MultiscriptElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void MultiscriptElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     m_baseElement->writeMathML( writer, ns );        // Just save the children in
                                                  // the right order

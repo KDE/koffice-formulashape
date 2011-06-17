@@ -26,7 +26,7 @@
 #include "AttributeManager.h"
 #include "FormulaCursor.h"
 #include "RowElement.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <QPainter>
 #include <QPen>
 #include <kdebug.h>
@@ -164,9 +164,9 @@ ElementType RootElement::elementType() const
     return Root;
 }
 
-bool RootElement::readMathMLContent( const KoXmlElement& element )
+bool RootElement::readMathMLContent( const KXmlElement& element )
 {
-    KoXmlElement tmp;
+    KXmlElement tmp;
     int counter = 0;
     forEachElement(tmp, element) {
         if (counter==0) {
@@ -185,7 +185,7 @@ bool RootElement::readMathMLContent( const KoXmlElement& element )
     return true;
 }
 
-void RootElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void RootElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     Q_ASSERT( m_radicand );
     Q_ASSERT( m_exponent );

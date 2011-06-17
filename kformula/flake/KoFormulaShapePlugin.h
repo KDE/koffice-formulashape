@@ -29,7 +29,7 @@
  * This class implements a formula plugin that is loadable by any flake supporting
  * KOffice application. It only contains a destructor and a constructor where the
  * latter has code in it. All functionality has to be in the constructor.
- * In the constructor the plugin registers a shape and a tool in the KoShapeRegistry
+ * In the constructor the plugin registers a shape and a tool in the KShapeRegistry
  * so that the applications "know" that the formula plugin exists.
  */
 class KoFormulaShapePlugin : public QObject {

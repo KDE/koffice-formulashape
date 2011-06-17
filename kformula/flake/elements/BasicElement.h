@@ -34,12 +34,12 @@
 #include <QLineF>
 class QPainter;
 class QVariant;
-class KoXmlWriter;
+class KXmlWriter;
 class AttributeManager;
 class FormulaCursor;
 class QPainterPath;
 class TableDataElement;
-class KoXmlElement;
+class KXmlElement;
 
 #define DEBUGID 40000
 
@@ -267,10 +267,10 @@ public:
     void setDisplayStyle(bool displayStyle);
 
     /// Read the element from MathML
-    bool readMathML( const KoXmlElement& element );
+    bool readMathML( const KXmlElement& element );
 
     /// Save the element to MathML 
-    void writeMathML( KoXmlWriter* writer, const QString& ns = "math" ) const;
+    void writeMathML( KXmlWriter* writer, const QString& ns = "math" ) const;
 
     /// @return true, if @p other is a descendant of this element
     bool hasDescendant(BasicElement* other) const;
@@ -302,16 +302,16 @@ public:
 
 protected:
     /// Read all attributes loaded and add them to the m_attributes map 
-    virtual bool readMathMLAttributes( const KoXmlElement& element );
+    virtual bool readMathMLAttributes( const KXmlElement& element );
 
     /// Read all content from the node - reimplemented by child elements
-    virtual bool readMathMLContent( const KoXmlElement& element );
+    virtual bool readMathMLContent( const KXmlElement& element );
 
     /// Write all attributes of m_attributes to @p writer
-    virtual void writeMathMLAttributes( KoXmlWriter* writer ) const;
+    virtual void writeMathMLAttributes( KXmlWriter* writer ) const;
 
-    /// Write all content to the KoXmlWriter - reimplemented by the child elements
-    virtual void writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const;
+    /// Write all content to the KXmlWriter - reimplemented by the child elements
+    virtual void writeMathMLContent( KXmlWriter* writer, const QString& ns ) const;
 
     static void cleanElementTree(BasicElement* element);
     

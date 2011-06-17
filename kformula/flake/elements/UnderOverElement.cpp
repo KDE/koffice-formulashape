@@ -21,7 +21,7 @@
 #include "UnderOverElement.h"
 #include "FormulaCursor.h"
 #include "AttributeManager.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <kdebug.h>
 #include <QPainter>
 
@@ -129,9 +129,9 @@ QString UnderOverElement::attributesDefaultValue( const QString& attribute ) con
     return "false";  // the default for accent and
 }
 
-bool UnderOverElement::readMathMLContent( const KoXmlElement& parent )
+bool UnderOverElement::readMathMLContent( const KXmlElement& parent )
 {
-    KoXmlElement tmp;
+    KXmlElement tmp;
     int counter=0;
     forEachElement( tmp, parent ) {
         if (counter==0) {
@@ -161,7 +161,7 @@ bool UnderOverElement::readMathMLContent( const KoXmlElement& parent )
     return true;
 } 
 
-void UnderOverElement::writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const
+void UnderOverElement::writeMathMLContent( KXmlWriter* writer, const QString& ns ) const
 {
     m_baseElement->writeMathML( writer, ns );   // Just save the children in
     if(m_elementType != Over) {

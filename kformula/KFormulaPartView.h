@@ -31,9 +31,9 @@ class KAction;
 class QPaintEvent;
 class QFocusEvent;
 class QResizeEvent;
-class KoCanvasController;
+class KCanvasController;
 class KoZoomHandler;
-class KoViewConverter;
+class KViewConverter;
 
 /**
  * @short The view class of the KFormulaPart
@@ -65,7 +65,7 @@ public:
      */
     KFormulaPartDocument* document() const;
 
-    KoViewConverter* viewConverter();
+    KViewConverter* viewConverter();
 
     // reimplemented to return 0 as we don't allow zooming in our UI yet
     virtual KoZoomController *zoomController() const { return 0; }
@@ -97,7 +97,7 @@ private:
     KFormulaCanvas* m_formulaCanvas;
 
     /// The scrollarea wrapper managing the canvas
-    KoCanvasController* m_canvasController;
+    KCanvasController* m_canvasController;
 
     /// The zoom handler taking care of zooming for this view
     KoZoomHandler* m_zoomHandler;

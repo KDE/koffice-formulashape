@@ -126,10 +126,10 @@ public:
 
 protected:
     /// Read contents of the token element. Content should be unicode text strings or mglyphs
-    bool readMathMLContent( const KoXmlElement& parent );
+    bool readMathMLContent( const KXmlElement& parent );
 
-    /// Write all content to the KoXmlWriter - reimplemented by the child elements
-    virtual void writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const;
+    /// Write all content to the KXmlWriter - reimplemented by the child elements
+    virtual void writeMathMLContent( KXmlWriter* writer, const QString& ns ) const;
 
     /// @return The font to use
     QFont font() const;

@@ -23,11 +23,11 @@
 #include "FormulaToolWidget.h"
 #include "BasicElement.h"
 #include "FormulaEditor.h"
-#include <KoCanvasBase.h>
-#include <KoPointerEvent.h>
-#include <KoSelection.h>
-#include <KoShapeManager.h>
-#include <KoShapeController.h>
+#include <KCanvasBase.h>
+#include <KPointerEvent.h>
+#include <KSelection.h>
+#include <KShapeManager.h>
+#include <KShapeController.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <QKeyEvent>
@@ -38,22 +38,22 @@
 #include <QFile>
 #include <QSignalMapper>
 #include <KFileDialog>
-#include <KoShapeSavingContext.h>
-#include <KoShapeLoadingContext.h>
-#include <KoOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KShapeSavingContext.h>
+#include <KShapeLoadingContext.h>
+#include <KOdfLoadingContext.h>
+#include <KOdfStylesReader.h>
 #include "FormulaCommand.h"
 #include "FormulaCommandUpdate.h"
-#include <KoXmlReader.h>
-#include <KoXmlWriter.h>
-#include <KoGenStyles.h>
-#include <KoEmbeddedDocumentSaver.h>
+#include <KXmlReader.h>
+#include <KXmlWriter.h>
+#include <KOdfGenericStyles.h>
+#include <KOdfEmbeddedDocumentSaver.h>
 #include "FormulaRenderer.h"
 #include <qclipboard.h>
 
 
 
-KoFormulaTool::KoFormulaTool( KoCanvasBase* canvas ) : KoToolBase( canvas ),
+KoFormulaTool::KoFormulaTool( KCanvasBase* canvas ) : KToolBase( canvas ),
                                                        m_formulaShape( 0 ),
                                                        m_formulaEditor( 0 )
 {
@@ -73,10 +73,10 @@ KoFormulaTool::~KoFormulaTool()
     }
 }
 
-void KoFormulaTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void KoFormulaTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
-    foreach (KoShape *shape, shapes) {
+    foreach (KShape *shape, shapes) {
         m_formulaShape = dynamic_cast<KoFormulaShape*>( shape );
         if( m_formulaShape )
             break;
@@ -146,14 +146,14 @@ void KoFormulaTool::updateCursor(FormulaCommand* command, bool undo)
 }
 
 
-void KoFormulaTool::paint( QPainter &painter, const KoViewConverter &converter )
+void KoFormulaTool::paint( QPainter &painter, const KViewConverter &converter )
 {
     painter.save();
     // transform painter from view coordinate system to document coordinate system
     // remember that matrix multiplication is not commutative so painter.matrix
     // has to come last
     painter.setTransform(m_formulaShape->absoluteTransformation(&converter) * painter.transform());
-    KoShape::applyConversion(painter,converter);
+    KShape::applyConversion(painter,converter);
     m_formulaShape->formulaRenderer()->paintElement(painter,m_formulaShape->formulaData()->formulaElement(),true);
     m_formulaEditor->paint( painter );
     painter.restore();
@@ -164,7 +164,7 @@ void KoFormulaTool::repaintCursor()
     canvas()->updateCanvas( m_formulaShape->boundingRect() );
 }
 
-void KoFormulaTool::mousePressEvent( KoPointerEvent *event )
+void KoFormulaTool::mousePressEvent( KPointerEvent *event )
 {
     // Check if the event is valid means inside the shape 
     if(!m_formulaShape->boundingRect().contains( event->point )) {
@@ -184,7 +184,7 @@ void KoFormulaTool::mousePressEvent( KoPointerEvent *event )
     event->accept();
 }
 
-void KoFormulaTool::mouseDoubleClickEvent( KoPointerEvent *event )
+void KoFormulaTool::mouseDoubleClickEvent( KPointerEvent *event )
 {
     if( !m_formulaShape->boundingRect().contains( event->point ) ) {
         return;
@@ -201,7 +201,7 @@ void KoFormulaTool::mouseDoubleClickEvent( KoPointerEvent *event )
     event->accept();
 }
 
-void KoFormulaTool::mouseMoveEvent( KoPointerEvent *event )
+void KoFormulaTool::mouseMoveEvent( KPointerEvent *event )
 {
 //     Q_UNUSED( event )
     if (!(event->buttons() & Qt::LeftButton)) {
@@ -220,7 +220,7 @@ void KoFormulaTool::mouseMoveEvent( KoPointerEvent *event )
     event->accept();
 }
 
-void KoFormulaTool::mouseReleaseEvent( KoPointerEvent *event )
+void KoFormulaTool::mouseReleaseEvent( KPointerEvent *event )
 {
     Q_UNUSED( event )
 
@@ -374,12 +374,12 @@ void KoFormulaTool::loadFormula()
     if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) )
         return;
 
-    KoOdfStylesReader stylesReader;
-    KoOdfLoadingContext odfContext( stylesReader, 0 );
-    KoShapeLoadingContext shapeContext(odfContext, canvas()->shapeController()->resourceManager());
+    KOdfStylesReader stylesReader;
+    KOdfLoadingContext odfContext( stylesReader, 0 );
+    KShapeLoadingContext shapeContext(odfContext, canvas()->shapeController()->resourceManager());
 
     // setup a DOM structure and start the actual loading process
-    KoXmlDocument tmpDocument;
+    KXmlDocument tmpDocument;
     tmpDocument.setContent( &file, false, 0, 0, 0 );
     FormulaElement* formulaElement = new FormulaElement();     // create a new root element
     formulaElement->readMathML( tmpDocument.documentElement() );     // and load the new formula
@@ -394,10 +394,10 @@ void KoFormulaTool::saveFormula()
         return;
 
     QFile file( url.path() );
-    KoXmlWriter writer( &file );
-    KoGenStyles styles;
-    KoEmbeddedDocumentSaver embeddedSaver;
-    KoShapeSavingContext shapeSavingContext( writer, styles, embeddedSaver );
+    KXmlWriter writer( &file );
+    KOdfGenericStyles styles;
+    KOdfEmbeddedDocumentSaver embeddedSaver;
+    KShapeSavingContext shapeSavingContext( writer, styles, embeddedSaver );
 
     m_formulaShape->formulaData()->saveMathML( shapeSavingContext );
 }
@@ -490,7 +490,7 @@ void KoFormulaTool::copy() const
 
 void KoFormulaTool::deleteSelection()
 {
-    KoToolBase::deleteSelection();
+    KToolBase::deleteSelection();
 }
 
 bool KoFormulaTool::paste()

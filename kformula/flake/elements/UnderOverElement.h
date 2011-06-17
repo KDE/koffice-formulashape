@@ -69,10 +69,10 @@ public:
 
 protected:
     /// Read all content from the node - reimplemented by child elements
-    bool readMathMLContent( const KoXmlElement& element );
+    bool readMathMLContent( const KXmlElement& element );
 
-    /// Write all content to the KoXmlWriter - reimplemented by the child elements
-    void writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const;   
+    /// Write all content to the KXmlWriter - reimplemented by the child elements
+    void writeMathMLContent( KXmlWriter* writer, const QString& ns ) const;   
  
 private:
     /// The element used as basis for the under and the over element

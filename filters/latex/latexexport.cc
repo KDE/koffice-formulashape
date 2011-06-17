@@ -29,7 +29,7 @@
 #include <kmessagebox.h>
 
 #include <KoFilterChain.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 
 #include <kformuladocument.h>
 #include <kformulacontainer.h>
@@ -54,7 +54,7 @@ KoFilter::ConversionStatus LATEXExport::convert(const QByteArray& from, const QB
     if (to != "text/x-tex" || from != "application/x-kformula")
         return KoFilter::NotImplemented;
 
-    KoStoreDevice* in = m_chain->storageFile("root", KoStore::Read);
+    KOdfStorageDevice* in = m_chain->storageFile("root", KOdfStore::Read);
     if (!in) {
         QApplication::restoreOverrideCursor();
         KMessageBox::error(0, i18n("Failed to read data."), i18n("LaTeX Export Error"));

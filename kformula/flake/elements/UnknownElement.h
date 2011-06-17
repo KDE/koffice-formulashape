@@ -76,16 +76,16 @@ public:
 
 protected:
     /// Read all attributes - reimplemented from BasicElement
-    bool readMathMLAttributes( const KoXmlElement& element );
+    bool readMathMLAttributes( const KXmlElement& element );
 
     /// Read root contents - reimplemented from BasicElement
-    bool readMathMLContent( const KoXmlElement& element );
+    bool readMathMLContent( const KXmlElement& element );
 
     /// Write element attributes - reimplemented from BasicElement
-    void writeMathMLAttributes( KoXmlWriter* writer ) const;
+    void writeMathMLAttributes( KXmlWriter* writer ) const;
 
     /// Write root contents - reimplemented from BasicElement
-    void writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const;
+    void writeMathMLContent( KXmlWriter* writer, const QString& ns ) const;
 
 private:
 };

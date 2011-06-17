@@ -142,7 +142,7 @@ bool OperatorElement::insertText ( int position, const QString& text )
     return TokenElement::insertText ( position, text );
 }
 
-bool OperatorElement::readMathMLContent ( const KoXmlElement& parent )
+bool OperatorElement::readMathMLContent ( const KXmlElement& parent )
 {
     bool tmp = TokenElement::readMathMLContent ( parent );
     m_dict.queryOperator( m_rawString, determineOperatorForm() );

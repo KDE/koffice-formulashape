@@ -46,9 +46,9 @@ public:
 
 
 private:
-    bool readMathMLAttributes( const KoXmlElement& element );
-    void writeMathMLAttributes( KoXmlWriter* writer ) const;
-    void writeMathMLContent( KoXmlWriter* writer, const QString& ns ) const;
+    bool readMathMLAttributes( const KXmlElement& element );
+    void writeMathMLAttributes( KXmlWriter* writer ) const;
+    void writeMathMLContent( KXmlWriter* writer, const QString& ns ) const;
 
     QChar m_char;         // Char to be shown
     QString m_fontFamily; // Font family to use

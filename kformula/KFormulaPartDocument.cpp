@@ -30,11 +30,11 @@
 #include <QUndoStack>
 
 #include <KoGlobal.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoMainWindow.h>
-#include <KoStoreDevice.h>
-#include <KoOdfReadStore.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfStorageDevice.h>
+#include <KOdfStoreReader.h>
+#include <KOdfWriteStore.h>
 #include <ktemporaryfile.h>
 #include <klocale.h>
 
@@ -59,30 +59,30 @@ KFormulaPartDocument::~KFormulaPartDocument()
 }
 
 
-void KFormulaPartDocument::addShape (KoShape *shape)
+void KFormulaPartDocument::addShape (KShape *shape)
 {
     Q_UNUSED( shape );
 }
 
-void KFormulaPartDocument::removeShape (KoShape *shape)
+void KFormulaPartDocument::removeShape (KShape *shape)
 {
     Q_UNUSED( shape );
 }
 
-QMap<QString, KoDataCenterBase *> KFormulaPartDocument::dataCenterMap() const
+QMap<QString, KDataCenterBase *> KFormulaPartDocument::dataCenterMap() const
 {
     Q_ASSERT(false);
     // if the formula app ever supports more than a single shape this should be implemented
     // along with several other methods - see any other app or ask boemann
-    return QMap<QString, KoDataCenterBase *>() ;
+    return QMap<QString, KDataCenterBase *>() ;
 }
 
 bool KFormulaPartDocument::saveOdf( SavingContext &documentContext )
 {
     Q_UNUSED( documentContext );
-/*  KoStoreDevice dev( store );
+/*  KOdfStorageDevice dev( store );
  
-    KoXmlWriter* contentWriter = KoOdfWriteStore::createOasisXmlWriter( &dev, "math:math" );
+    KXmlWriter* contentWriter = KOdfWriteStore::createOasisXmlWriter( &dev, "math:math" );
     formulaShape->saveOasis( contentWriter )
     delete contentWriter;
 
@@ -92,7 +92,7 @@ bool KFormulaPartDocument::saveOdf( SavingContext &documentContext )
     return true;
 }
 
-bool KFormulaPartDocument::loadOdf( KoOdfReadStore & odfStore )
+bool KFormulaPartDocument::loadOdf( KOdfStoreReader & odfStore )
 {
     m_formulaElement->readMathML( odfStore.contentDoc().documentElement() );
 /*    if ( document->loadOasis( doc ) )
@@ -105,7 +105,7 @@ bool KFormulaPartDocument::loadOdf( KoOdfReadStore & odfStore )
     return true;
 }
 
-bool KFormulaPartDocument::loadXML(const KoXmlDocument& doc, KoStore*)
+bool KFormulaPartDocument::loadXML(const KXmlDocument& doc, KOdfStore*)
 {
     // TODO: Check whether it's really MathML or old KFO format
     m_formulaElement->readMathML( doc.documentElement() );

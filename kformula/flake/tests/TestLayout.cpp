@@ -28,11 +28,11 @@
 #include "IdentifierElement.h"
 #include "FencedElement.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 static QRectF layout(BasicElement* element, const QString& input)
 {
-    KoXmlDocument doc;
+    KXmlDocument doc;
     doc.setContent( input );
     element->readMathML(doc.documentElement());
     AttributeManager am;

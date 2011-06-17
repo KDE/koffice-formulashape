@@ -29,8 +29,8 @@
 #include <kmessagebox.h>
 
 #include <KoFilterChain.h>
-#include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStore.h>
+#include <KOdfStorageDevice.h>
 
 
 #include "pngexport.h"
@@ -52,7 +52,7 @@ KoFilter::ConversionStatus PNGExport::convert(const QByteArray& from, const QByt
     if (to != "image/png" || from != "application/x-kformula")
         return KoFilter::NotImplemented;
 
-    KoStoreDevice* in = m_chain->storageFile("root", KoStore::Read);
+    KOdfStorageDevice* in = m_chain->storageFile("root", KOdfStore::Read);
     if (!in) {
         kapp->restoreOverrideCursor();
         KMessageBox::error(0, i18n("Failed to read data."), i18n("PNG Export Error"));
