@@ -25,6 +25,7 @@
 
 #include <QFontDatabase>
 #include <QFontMetricsF>
+#include <QStringList>
 
 #include <kdebug.h>
 
