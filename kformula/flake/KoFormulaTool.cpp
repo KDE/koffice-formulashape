@@ -57,6 +57,7 @@ KoFormulaTool::KoFormulaTool( KCanvasBase* canvas ) : KToolBase( canvas ),
                                                        m_formulaShape( 0 ),
                                                        m_formulaEditor( 0 )
 {
+    setFlags(ToolHandleKeyEvents);
     m_signalMapper = new QSignalMapper(this);
     setupActions();
     setTextMode(true);
