@@ -26,7 +26,7 @@
 #include <kpluginfactory.h>
 
 K_PLUGIN_FACTORY(KoFormulaShapePluginFactory, registerPlugin<KoFormulaShapePlugin>();)
-K_EXPORT_PLUGIN(KoFormulaShapePluginFactory("FormulaShape"))
+K_EXPORT_PLUGIN(KoFormulaShapePluginFactory("KoFormulaShape"))
 
 KoFormulaShapePlugin::KoFormulaShapePlugin( QObject* parent, const QVariantList& )
                     : QObject( parent )

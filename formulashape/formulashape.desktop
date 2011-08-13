@@ -15,6 +15,6 @@ Name[uk]=Форма формули
 Name[x-test]=xxFormula Shapexx
 X-KDE-ServiceTypes=KOffice/Flake
 Type=Service
-X-KDE-Library=formulashape
+X-KDE-Library=koformulashape
 X-Flake-MinVersion=0
 X-Flake-PluginVersion=1
