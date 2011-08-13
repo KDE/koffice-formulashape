@@ -87,7 +87,7 @@ bool FormulaDocument::loadOdf( KOdfStoreReader &odfStore )
     KXmlDocument doc = odfStore.contentDoc();
     KXmlElement  bodyElement = doc.documentElement();
 
-    kDebug(31000) << bodyElement.nodeName();
+    // kDebug(31000) << bodyElement.nodeName();
 
     if (bodyElement.nodeName() != "math:math") {
         kError(35001) << "No <math:math> element found.";

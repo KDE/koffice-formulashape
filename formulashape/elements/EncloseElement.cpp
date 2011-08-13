@@ -28,12 +28,10 @@ EncloseElement::EncloseElement( BasicElement* parent ) : RowElement( parent )
 
 void EncloseElement::paint( QPainter& painter, AttributeManager* )
 {
-    painter.save();
     QPen pen;
     pen.setWidth( 1 );
     painter.setPen( pen );
     painter.drawPath( m_enclosePath );
-    painter.restore();
 }
 
 void EncloseElement::layout( const AttributeManager* am )

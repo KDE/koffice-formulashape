@@ -71,8 +71,8 @@ FormulaCursor::FormulaCursor (const FormulaCursor& other )
 
 void FormulaCursor::paint( QPainter& painter ) const
 {
-    kDebug() << "Drawing cursor with selecting: "<< isSelecting() << " from "
-    << mark()<<" to " << position() << " in "<<ElementFactory::elementName(m_currentElement->elementType());
+    // kDebug() << "Drawing cursor with selecting: "<< isSelecting() << " from "
+    //     << mark()<<" to " << position() << " in "<<ElementFactory::elementName(m_currentElement->elementType());
     if( !m_currentElement )
         return;
     painter.save();

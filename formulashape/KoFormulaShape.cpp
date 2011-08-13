@@ -61,14 +61,13 @@ KoFormulaShape::~KoFormulaShape()
 
 void KoFormulaShape::paint( QPainter &painter, const KViewConverter &converter )
 {
-    painter.save();
     applyConversion( painter, converter );   // apply zooming and coordinate translation
     m_formulaRenderer->layoutElement(  m_formulaData->formulaElement() );
     m_formulaRenderer->paintElement( painter,  m_formulaData->formulaElement() );  // paint the formula
-    painter.restore();
 }
 
-void KoFormulaShape::updateLayout() {
+void KoFormulaShape::updateLayout()
+{
     m_formulaRenderer->layoutElement( m_formulaData->formulaElement() );
 
      KShape::setSize(m_formulaData->formulaElement()->boundingRect().size());
@@ -95,7 +94,7 @@ FormulaRenderer* KoFormulaShape::formulaRenderer() const
 
 bool KoFormulaShape::loadOdf( const KXmlElement& element, KShapeLoadingContext &context )
 {
-    kDebug() <<"Loading ODF in Formula";
+    // kDebug() <<"Loading ODF in Formula";
     loadOdfAttributes(element, context, OdfAllAttributes);
     return loadOdfFrame(element, context);
 }
@@ -256,7 +255,7 @@ bool KoFormulaShape::loadOdfEmbedded( const KXmlElement &topLevelElement,
                                       KShapeLoadingContext &context )
 {
     Q_UNUSED(context);
-    kDebug(31000) << topLevelElement.nodeName();
+    // kDebug(31000) << topLevelElement.nodeName();
 
 #if 0
     const KXmlElement &topLevelElement = KoXml::namedItemNS(element, "http://www.w3.org/1998/Math/MathML", "math");
@@ -280,7 +279,7 @@ void KoFormulaShape::saveOdf( KShapeSavingContext& context ) const
 {
     // FIXME: Add saving of embedded document if m_isInline is false;
 
-    kDebug() <<"Saving ODF in Formula";
+    // kDebug() <<"Saving ODF in Formula";
     KXmlWriter& writer = context.xmlWriter();
     writer.startElement("draw:frame");
     saveOdfAttributes(context, OdfAllAttributes);

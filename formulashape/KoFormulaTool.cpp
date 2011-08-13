@@ -103,7 +103,7 @@ void KoFormulaTool::activate(ToolActivation toolActivation, const QSet<KShape*> 
             m_cursorList.removeAll(editor);
             if (formulaData->formulaElement()->hasDescendant(editor->cursor().currentElement())) {
                 if (editor->cursor().isAccepted()) {
-                    kDebug()<<"Found old cursor";
+                    // kDebug()<<"Found old cursor";
                     m_formulaEditor=editor;
                     break;
                 }
@@ -127,7 +127,7 @@ void KoFormulaTool::deactivate()
     disconnect(m_signalMapper,0,this,0);
     if (canvas()) {
         m_cursorList.append(m_formulaEditor);
-        kDebug()<<"Appending cursor";
+        // kDebug()<<"Appending cursor";
     }
     if (m_cursorList.count() > 20) { // don't let it grow indefinitely
         //TODO: is this save?
@@ -141,10 +141,10 @@ void KoFormulaTool::deactivate()
 void KoFormulaTool::updateCursor(FormulaCommand* command, bool undo)
 {
     if (command!=0) {
-        kDebug()<<"Going to change cursor";
+        // kDebug()<<"Going to change cursor";
         command->changeCursor(m_formulaEditor->cursor(),undo);
     } else {
-        kDebug()<<"Going to reset cursor";
+        // kDebug()<<"Going to reset cursor";
         resetFormulaEditor();
     }
     repaintCursor();
@@ -210,11 +210,13 @@ void KoFormulaTool::mouseMoveEvent( KPointerEvent *event )
 {
 //     Q_UNUSED( event )
     if (!(event->buttons() & Qt::LeftButton)) {
-	return;
+        return;
     }
+#if 0
     // Check if the event is valid means inside the shape
     if( !m_formulaShape->boundingRect().contains( event->point ) )
         kDebug() << "Getting most probably invalid mouseMoveEvent";
+#endif
     
     // transform the global coordinates into shape coordinates
     QPointF p = m_formulaShape->absoluteTransformation(0).inverted().map( event->point );

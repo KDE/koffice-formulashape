@@ -50,10 +50,8 @@ BasicElement::~BasicElement()
 
 void BasicElement::paint( QPainter& painter, AttributeManager* )
 {
-    painter.save();
     painter.setBrush( QBrush( Qt::blue ) );
     painter.drawRect( QRectF(0.0, 0.0, width(), height()) );
-    painter.restore();
 }
 
 void BasicElement::paintEditingHints ( QPainter& painter, AttributeManager* am )

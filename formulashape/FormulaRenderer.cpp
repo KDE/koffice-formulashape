@@ -36,22 +36,24 @@ FormulaRenderer::~FormulaRenderer()
 void FormulaRenderer::paintElement( QPainter& p, BasicElement* element, bool hints )
 {
     p.save();
-    p.setRenderHint( QPainter::Antialiasing );
+    p.setRenderHint( QPainter::Antialiasing);
     p.translate( element->origin() );          // setup painter
     if (!hints) {
         element->paint( p, m_attributeManager );   // let element paint itself
     } else {
         element->paintEditingHints( p, m_attributeManager );
     }
+    p.restore();
 
     // eventually paint all its children
     if( !element->childElements().isEmpty() && element->elementType() != Phantom ) {
         foreach( BasicElement* tmpElement, element->childElements() ) {
+            p.save();
             paintElement( p, tmpElement, hints );
+            p.restore();
         }
     }
 
-    p.restore();
 }
 
 
