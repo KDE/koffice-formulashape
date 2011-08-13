@@ -53,14 +53,18 @@
 
 
 
-KoFormulaTool::KoFormulaTool( KCanvasBase* canvas ) : KToolBase( canvas ),
-                                                       m_formulaShape( 0 ),
-                                                       m_formulaEditor( 0 )
+KoFormulaTool::KoFormulaTool(KCanvasBase *canvas)
+    : KToolBase(canvas),
+    m_formulaShape(0),
+    m_formulaEditor(0),
+    m_signalMapper(new QSignalMapper(this))
 {
-    setFlags(ToolHandleKeyEvents);
-    m_signalMapper = new QSignalMapper(this);
+    setFlags(ToolHandleKeyEvents | ToolHandleShortcutOverride);
     setupActions();
-    setTextMode(true);
+
+    QStringList mimes;
+    mimes << "text/plain" << "application/xml";
+    setSupportedPasteMimeTypes(mimes);
 }
 
 KoFormulaTool::~KoFormulaTool()
@@ -509,10 +513,9 @@ bool KoFormulaTool::paste()
     return false;
 }
 
-QStringList KoFormulaTool::supportedPasteMimeTypes() const
+void KoFormulaTool::shortcutOverride(QKeyEvent *event)
 {
-    QStringList tmp;
-    tmp << "text/plain";
-    tmp << "application/xml";
-    return tmp;
+    if (event->modifiers() == Qt::ShiftModifier || event->modifiers() == Qt::NoModifier) {
+        event->accept();
+    }
 }

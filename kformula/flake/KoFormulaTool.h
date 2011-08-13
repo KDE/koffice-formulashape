@@ -1,12 +1,12 @@
 /* This file is part of the KDE project
-   Copyright (C) 2006 Martin Pfeiffer <hubipete@gmx.net> 
+   Copyright (C) 2006 Martin Pfeiffer <hubipete@gmx.net>
                  2009 Jeremias Epperlein <jeeree@web.de>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
    License as published by the Free Software Foundation; either
    version 2 of the License, or (at your option) any later version.
-  
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -45,22 +45,6 @@ public:
     /// reimplemented
     void paint( QPainter &painter, const KViewConverter &converter );
 
-    /// reimplemented
-    void mousePressEvent( KPointerEvent *event ) ;
-
-    /// reimplemented
-    void mouseDoubleClickEvent( KPointerEvent *event );
-
-    /// reimplemented
-    void mouseMoveEvent( KPointerEvent *event );
-
-    /// reimplemented
-    void mouseReleaseEvent( KPointerEvent *event );
-
-    void keyPressEvent( QKeyEvent *event );
-
-    void keyReleaseEvent( QKeyEvent *event );
-
     void remove( bool backSpace );
 
     /// @return The currently manipulated KoFormulaShape
@@ -83,7 +67,7 @@ public slots:
     void insert( const QString& action );
 
     void changeTable( QAction* action);
-    
+
     void insertSymbol( const QString& symbol);
 
     /// Reposition the cursor according to the data change
@@ -93,7 +77,7 @@ public slots:
 
     void loadFormula();
 
-    
+
 protected:
     /// Create default option widget
     QWidget* createOptionWidget();
@@ -104,8 +88,25 @@ protected:
 
     virtual bool paste();
 
-    virtual QStringList supportedPasteMimeTypes() const;
-    
+    virtual void shortcutOverride(QKeyEvent *event);
+
+    /// reimplemented
+    void mousePressEvent( KPointerEvent *event ) ;
+
+    /// reimplemented
+    void mouseDoubleClickEvent( KPointerEvent *event );
+
+    /// reimplemented
+    void mouseMoveEvent( KPointerEvent *event );
+
+    /// reimplemented
+    void mouseReleaseEvent( KPointerEvent *event );
+
+    void keyPressEvent( QKeyEvent *event );
+
+    void keyReleaseEvent( QKeyEvent *event );
+
+
 private:
     /// Repaint the cursor and selection
     void repaintCursor();
@@ -114,7 +115,7 @@ private:
     void setupActions();
 
     void addTemplateAction(const QString& caption, const QString& name, const QString& data, const QString& iconName);
-    
+
     /// The FormulaShape the tool is manipulating
     KoFormulaShape* m_formulaShape;
 
