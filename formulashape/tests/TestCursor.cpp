@@ -27,7 +27,7 @@
 #include "FormulaCommandUpdate.h"
 #include "KoFormulaTool.h"
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KCanvasBase.h>
 #include <kdebug.h>
 #include <FormulaEditor.h>

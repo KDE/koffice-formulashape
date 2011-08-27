@@ -25,7 +25,6 @@
 #include "FormulaEditor.h"
 #include <KCanvasBase.h>
 #include <KPointerEvent.h>
-#include <KSelection.h>
 #include <KShapeManager.h>
 #include <KShapeController.h>
 #include <kiconloader.h>
