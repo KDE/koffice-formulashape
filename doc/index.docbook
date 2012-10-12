@@ -6,9 +6,9 @@
   <!ENTITY % addindex "IGNORE">
 ]>
  
-<book lang="&language;">
+<book id="koffice-formulashape" lang="&language;">
 
-<bookinfo>
+<book id="koffice-formulashape"info>
 <title>The &kformula; Handbook</title>
 
 <authorgroup>
